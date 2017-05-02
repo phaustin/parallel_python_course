@@ -30,6 +30,7 @@
 1. Using xarray to analyze out-of-core datasets
 1. Using dask and xarray to compute on multiple cores
 1. Visualizing parallelization with dask
+1. Setting up a conda-forge environment for parallel computing
 
 **Setup requirements**:
 
