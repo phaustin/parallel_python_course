@@ -11,7 +11,7 @@
 **Prerequisites**:
 * Some familiarity with Jupyter notebooks, Python and numpy at the level of 
   Jake Vanderplas' [Whirlwind tour of Python](https://github.com/jakevdp/WhirlwindTourOfPython/blob/f40b435dea823ad5f094d48d158cc8b8f282e9d5/Index.ipynb)
-  or Patrick Wall's [Tuesday introduction to Jupyter](https://github.com/razoumov/summerSchools17/blob/master/ubc/patrick.md)
+  or this week's  [Tuesday introduction to Jupyter by Patrick Wall](https://github.com/razoumov/summerSchools17/blob/master/ubc/patrick.md)
 
 **Course plan**:
 
