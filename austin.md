@@ -25,9 +25,9 @@
 1. Multiprocessing and multithreading with joblib
 1. Checkpointing/restarting multiprocessor jobs
 1. Writing extensions that release the GIL:
-   1.1  Using numba
-   1.1  Using cython
-   1.1  Using C++ and pybind11
+   1.  Using numba
+   1.  Using cython
+   1.  Using C++ and pybind11
 1. Using xarray to analyze out-of-core datasets
 1. Using dask and xarray to compute on multiple cores
 1. Visualizing parallelization with dask
