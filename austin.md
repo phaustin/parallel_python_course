@@ -4,9 +4,9 @@
 
 **Duration**: 3 hours
 
-**Target audience**: Researchers who develop their own code and consider porting them to GPU
+**Target audience**: Researchers interested in Python programming on multiple core machines.
 
-**Level**: intermediate
+**Level**: Intermediate
 
 **Prerequisites**:
 * Some familiarity with Jupyter notebooks, Python and numpy at the level of 
@@ -18,7 +18,6 @@
 * The objective is to learn how to write shared-memory Python programs that make use of multiple cores on
   a single node. The tutorial will introduce several python modules that schedule operations and manage
   data to simplify multiprocessing with Python.
-   
 
 1. Benchmarking parallel code
 1. Understanding the global interpreter lock (GIL)
@@ -34,5 +33,6 @@
 
 **Setup requirements**:
 
-* account on bison
-* bashrc with python 3.6.1 and g++ 5.2 in path
+* A laptop with the [x2go client](http://wiki.x2go.org/doku.php/download:start) installed
+* An account on bison
+* .bashrc which adds python 3.6.1 and g++ 5.2 to the PATH
