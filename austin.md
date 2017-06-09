@@ -23,6 +23,7 @@
 1. Understanding the global interpreter lock (GIL)
 1. Multiprocessing and multithreading with joblib
 1. Checkpointing/restarting multiprocessor jobs
+1. Multithreaded file i/o with [zarr](http://zarr.readthedocs.io/en/latest/) and [parquet](https://arrow.apache.org/docs/python/parquet.html)
 1. Writing extensions that release the GIL:
    1.  Using numba
    1.  Using cython
