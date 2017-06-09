@@ -28,8 +28,7 @@
    1.  Using numba
    1.  Using cython
    1.  Using C++ and pybind11
-1. Using xarray to analyze out-of-core datasets
-1. Using dask and xarray to compute on multiple cores
+1. Using dask/xarray to analyze out-of-core datasets
 1. Visualizing parallelization with dask
 1. Setting up a conda-forge environment for parallel computing
 
