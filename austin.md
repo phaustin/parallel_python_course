@@ -21,14 +21,14 @@
 
 1. Benchmarking parallel code
 1. Understanding the global interpreter lock (GIL)
-1. Multiprocessing and multithreading with joblib
+1. Multiprocessing and multithreading with [joblib](https://pythonhosted.org/joblib/)
 1. Checkpointing/restarting multiprocessor jobs
 1. Multithreaded file i/o with [zarr](http://zarr.readthedocs.io/en/latest/) and [parquet](https://arrow.apache.org/docs/python/parquet.html)
 1. Writing extensions that release the GIL:
-   1.  Using numba
-   1.  Using cython
-   1.  Using C++ and pybind11
-1. Using dask/xarray to analyze out-of-core datasets
+   1.  Using [numba](http://numba.pydata.org/)
+   1.  Using [cython](http://cython.org/)
+   1.  Using C++ and [pybind11](http://pybind11.readthedocs.io/en/stable/?badge=stable) with [xtensor-python](https://xtensor-python.readthedocs.io/en/latest/)
+1. Using [dask](http://dask.pydata.org/en/latest/)/[xarray](http://xarray.pydata.org/en/stable/dask.html) to analyze out-of-core datasets
 1. Visualizing parallelization with dask
 1. Setting up a conda-forge environment for parallel computing
 
