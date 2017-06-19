@@ -57,16 +57,16 @@ or your PATH environmental varialbe (for Windows 10) and give higher priority to
 1. Set conda-forge as your default repository and upgrade your python by doing the following.
    Open a bash terminal (OSX) or a cmd shell (Windows) and type:
 
-      conda config --prepend channels conda-forge
+         conda config --prepend channels conda-forge
 
    followed by:
 
-      conda update --all
+         conda update --all
 
 1. Once the update completes, copy the contents of https://github.com/phaustin/parallel_python_course/blob/master/conda_packages.txt
 into a local file named conda_packages.txt and install those packages by typing:
 
-      conda install --file conda_packages.txt
+        conda install --file conda_packages.txt
 
 
 ### If the install fails
