@@ -42,7 +42,7 @@
 
 ### For your own laptop
 
-I'd encourage you do a local python install on your laptop, to make sure we don't
+I'd encourage you to do a local python install on your laptop, to make sure we 
 don't get hit by bandwidth limitations or competition for cpus on grex nodes.
 
 We will need python 3.6 from conda-forge.  To get it:
