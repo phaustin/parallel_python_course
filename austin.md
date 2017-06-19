@@ -34,6 +34,19 @@
 
 **Setup requirements**:
 
+### For remote access to Westgrid
+
 * A laptop with the [x2go client](http://wiki.x2go.org/doku.php/download:start) installed
 * An account on bison
 * .bashrc which adds python 3.6.1 and g++ 5.2 to the PATH
+
+### For your own laptop
+
+I'd encourage you do a local python install on your laptop, to make sure we don't
+don't get hit by bandwidth limitations or competition for cpus on bison nodes.
+
+We will need python 3.6 from conda-forge.  To get it:
+
+1. Download miniconda 3.6 from 
+
+

@@ -1,0 +1,13 @@
+dask
+zarr
+pyarrow
+numpy
+jupyter
+numba
+cffi
+git
+bokeh
+joblib
+line_profiler
+memory_profiler
+snakeviz
