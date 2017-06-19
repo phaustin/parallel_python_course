@@ -11,3 +11,4 @@ joblib
 line_profiler
 memory_profiler
 snakeviz
+matplotlib
