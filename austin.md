@@ -43,10 +43,29 @@
 ### For your own laptop
 
 I'd encourage you do a local python install on your laptop, to make sure we don't
-don't get hit by bandwidth limitations or competition for cpus on bison nodes.
+don't get hit by bandwidth limitations or competition for cpus on grex nodes.
 
 We will need python 3.6 from conda-forge.  To get it:
 
-1. Download miniconda 3.6 from 
+1. Download miniconda 3.6 from https://conda.io/miniconda.html
+
+1. When prompted, set the install directory as something like /Users/phil/mini36,
+with the install for just yourself, but ignore the installer warning and make this your default
+python.  To reverse that decision it is easy to edit either your .bashrc/.bash_profile (for OSX)
+or your PATH environmental varialbe (for Windows 10) and give higher priority to some other python executable.  It will make the following step easier, however if this conda-forge python is your default for the class and the install below
+
+1. Set conda-forge as your default repository and upgrade your python by doing the following.
+   Open a bash terminal (OSX) or a cmd shell (Windows) and type:
+
+      conda config --prepend channels conda-forge
+
+   followed by:
+
+      conda update --all
+
+1. Once the update completes, copy the contents of https://github.com/phaustin/parallel_python_course/blob/master/conda_packages.txt
+into a local file named conda_packages.txt and install those packages by typing:
+
+      conda install --file conda_packages.txt
 
 
