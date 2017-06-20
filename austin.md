@@ -37,7 +37,7 @@
 ### For remote access to Westgrid
 
 * A laptop with the [x2go client](http://wiki.x2go.org/doku.php/download:start) installed
-* An account on bison
+* An account on grex
 * .bashrc which adds python 3.6.1 and g++ 5.2 to the PATH
 
 ### For your own laptop
