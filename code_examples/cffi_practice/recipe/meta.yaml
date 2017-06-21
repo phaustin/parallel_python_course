@@ -3,7 +3,7 @@ package:
   version: 0.1
   
 source:
-  git_url: ../
+  path: ../
 
 build:
   noarch: python
