@@ -1,0 +1,15 @@
+project(thread_tools)
+cmake_minimum_required(VERSION 2.8.12)
+SET(CMAKE_C_COMPILER clang)
+SET(CMAKE_CXX_COMPILER clang)
+set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_MODULE_PATH ${CONDA_CMAKE})
+message("pha here is ${CONDA_CMAKE}")
+include(pybind11Tools)
+include(xtensorConfig)
+message("here is xtensor_INCLUDE_DIRS: ${xtensor_INCLUDE_DIRS}")
+pybind11_add_module(thread_tools src/main.cpp)
+include_directories(${xtensor_INCLUDE_DIRS} ${NUMPY_INCLUDE})
+target_link_libraries(thread_tools PUBLIC ${CFFI_LIB})
+
+

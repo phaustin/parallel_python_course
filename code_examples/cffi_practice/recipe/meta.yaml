@@ -1,0 +1,27 @@
+package:
+  name: cffi_practice
+  version: 0.1
+  
+source:
+  git_url: ../
+
+build:
+  noarch: python
+
+requirements:
+  build:
+    - python
+    - setuptools
+
+  run:
+    - cffi_funs
+    - python
+    
+about:
+  summary: 'thread and clock utilities'
+  description: 'functions to demonstrate cffi calling from python'
+
+extra:
+  recipe-maintainers:
+    - phaustin
+
