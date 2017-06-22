@@ -14,7 +14,7 @@ requirements:
     - setuptools
     - pybind11 ==2.3
     - cmake
-    - numpy
+    - numpy    <1.12.2
     - xtensor-python ==0.13
     - cffi_practice
 
