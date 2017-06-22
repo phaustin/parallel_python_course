@@ -74,7 +74,7 @@ into a local file named conda_packages.txt and install those packages by typing:
 The odds of this going smoothly for everyone are obviously close to zero.  If all else fails you can follow along using a browser to point to my html files, and get the jupyter notebooks working at your leisure after class.   All the notebooks we work with during the tutorial will be available in the github repository, and from my bison account.  Feel free to email me at paustin@eoas.ubc.ca with any questions.
 
 
-### For Tbursday morning:
+### For Thursday morning:
 
 1. bookmark the lecture notes at https://clouds.eos.ubc.ca/~phil/courses/parallel_python/
 
