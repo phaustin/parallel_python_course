@@ -1,8 +1,2 @@
-cmake -G "NMake Makefiles"  -D CMAKE_INSTALL_PREFIX=%LIBRARY_PREFIX% %SRC_DIR%
-if errorlevel 1 exit 1
-
-nmake
-if errorlevel 1 exit 1
-
-nmake install
+"%PYTHON%" setup.py install
 if errorlevel 1 exit 1

@@ -1,23 +1,28 @@
 package:
-  name: cffi_funs
-  version: {{ environ.get('GIT_DESCRIBE_TAG', 'dev') }}
-  
-source:
-  path: ../
+  name: thread_tools
+  version: 0.1
 
 build:
   number: 0
 
+source:
+  path: ../
+
 requirements:
   build:
+    - python
+    - setuptools
+    - pybind11 ==2.3
     - cmake
+    - numpy
+    - xtensor-python ==0.13
+    - cffi_practice
 
+  run:
+    - python
+    - vs2015_runtime  # [win]
+    - cffi_practice
 
 about:
-  summary: 'thread and clock utilities'
-  description: 'functions to demonstrate cffi calling from python'
-
-extra:
-  recipe-maintainers:
-    - phaustin
-
+  summary: An example project built with pybind11.
+  license_file: LICENSE
