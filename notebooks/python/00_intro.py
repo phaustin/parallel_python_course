@@ -110,7 +110,7 @@ import logging
 # In[4]:
 
 
-Image(filename='images/morreau1.png')  #[Mor2017]
+#Image(filename='images/morreau1.png')  #[Mor2017]
 
 
 # #### Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread
@@ -124,11 +124,11 @@ Image(filename='images/morreau1.png')  #[Mor2017]
 # In[5]:
 
 
-Image(filename='images/morreau2.png')  #[Morr2017]
+#Image(filename='images/morreau2.png')  #[Morr2017]
 
 
 # In[6]:
 
 
-Image(filename='images/morreau3.png') #[Morr2017]
+#Image(filename='images/morreau3.png') #[Morr2017]
 

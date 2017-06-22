@@ -118,8 +118,8 @@ result
 # In[12]:
 
 
-from dask.dot import dot_graph
-dot_graph(out.dask)
+# from dask.dot import dot_graph
+# dot_graph(out.dask)
 
 
 # ### Now do the calculation
@@ -128,15 +128,16 @@ dot_graph(out.dask)
 
 
 with Profiler() as prof, ResourceProfiler(dt=0.1) as rprof,              CacheProfiler() as cprof:
-    result = out.compute()
+    answer = result.compute()
 
+print('here is rprof: ',rprof)
 
 # Visualize the cpu, memory and cache for the 4 threads
 
 # In[11]:
 
 
-visualize([prof, rprof,cprof], min_border_top=15, min_border_bottom=15)
+#visualize([prof, rprof,cprof], min_border_top=15, min_border_bottom=15)
 
 
 # ### You can evaluate your own functions on dask arrays
