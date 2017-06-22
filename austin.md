@@ -81,3 +81,7 @@ The odds of this going smoothly for everyone are obviously close to zero.  If al
 1. clone the course git repository with the notebooks by typing:
 
        git clone https://github.com/phaustin/parallel_python_course.git
+
+1. My anaconda channel is [phaustin](https://anaconda.org/phaustin/dashboard)
+
+
