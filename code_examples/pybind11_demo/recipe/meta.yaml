@@ -24,6 +24,4 @@ requirements:
     - cffi_practice
     - numpy    <1.12.2
 
-about:
-  summary: An example project built with pybind11.
-  license_file: LICENSE
+

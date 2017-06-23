@@ -43,6 +43,8 @@ class CMakeBuild(build_ext):
         extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
         cmake_args = ['-DNUMPY_INCLUDE=' + numpy_path,
               '-DCONDA_CMAKE=' + cmake_path,
+              '-DCONDA_CXX_COMPILER=/global/software/gcc-5.2.0-rpath/bin/g++',
+              '-DCONDA_C_COMPILER=/global/software/gcc-5.2.0-rpath/bin/gcc',
               '-DCFFI_INCLUDE=' + cp_paths['includedir'],
               '-DCFFI_LIB=' + cp_paths['libfile'],
               '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,

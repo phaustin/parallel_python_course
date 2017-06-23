@@ -2,6 +2,9 @@
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
+module purge
 module load gcc/5.2.0-experimental
-cmake -DCMAKE_CXX_COMPILER=/global/software/gcc-5.2.0-rpath/bin/g++ -DCMAKE_INSTALL_PREFIX=$PREFIX $SRC_DIR
-make install
+export CXX=/global/software/gcc-5.2.0-rpath/bin/g++
+export CC=/global/software/gcc-5.2.0-rpath/bin/gcc
+python setup.py install --single-version-externally-managed --record=record.txt
+#pip install --no-deps .
