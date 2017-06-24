@@ -5,6 +5,7 @@ import numpy as np
 #
 #  locate the library
 #
+print('running {}'.format(__file__))
 lib_so_file=get_paths()['libfile']
 ffi=FFI()
 sig_text =  """
