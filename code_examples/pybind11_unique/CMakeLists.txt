@@ -19,10 +19,6 @@ set_target_properties(make_unique PROPERTIES SUFFIX .so)
 install(TARGETS make_unique
         LIBRARY DESTINATION "${CMAKE_INSTALL_PREFIX}/lib")
 
-# add_custom_command(TARGET make_unique POST_BUILD
-#                    COMMAND ${CMAKE_COMMAND} -E copy_directory
-#                        ${CMAKE_SOURCE_DIR}/make_unique_headers ${CMAKE_INSTALL_PREFIX}/include)
-
 install(DIRECTORY ${CMAKE_SOURCE_DIR}/make_unique_headers
         DESTINATION include)
 
