@@ -3,14 +3,11 @@ import re
 import sys
 import platform
 import subprocess
-from pathlib import Path
-import numpy
+
 
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
-import cffi_practice as cp
-
 
 class CMakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
@@ -35,24 +32,11 @@ class CMakeBuild(build_ext):
             self.build_extension(ext)
 
     def build_extension(self, ext):
-        cp_paths = cp.get_paths()
-        cmake_path=str(Path(sys.exec_prefix) / Path('share/cmake/pybind11'))
-        xtensor_path=str(Path(sys.exec_prefix) / Path('share/cmake/xtensor'))
-        numpy_path=numpy.get_include()
-        cmake_path=cmake_path + ";" + xtensor_path + ";${CMAKE_MODULE_PATH}"
-        extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
-        cmake_args = ['-DNUMPY_INCLUDE=' + numpy_path,
-              '-DCONDA_CMAKE=' + cmake_path,
-              '-DCFFI_INCLUDE=' + cp_paths['includedir'],
-              '-DCFFI_LIB=' + cp_paths['libfile'],
-              '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
-              '-DPYTHON_EXECUTABLE=' + sys.executable]
-        print(f"calling cmake with {' '.join(cmake_args)}")
         cfg = 'Debug' if self.debug else 'Release'
         build_args = ['--config', cfg]
 
+        cmake_args=[]
         if platform.system() == "Windows":
-            cmake_args += ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY_{}={}'.format(cfg.upper(), extdir)]
             if sys.maxsize > 2**32:
                 cmake_args += ['-A', 'x64']
             build_args += ['--', '/m']
@@ -61,21 +45,36 @@ class CMakeBuild(build_ext):
             build_args += ['--', '-j2']
 
         env = os.environ.copy()
+        cmake_args += ["-DCMAKE_INSTALL_PREFIX={}".format(env['PREFIX'])]
+        print(f"calling cmake with {' '.join(cmake_args)}")
+        env['CXX']='clang++'
+        env['CC']='clang'
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(env.get('CXXFLAGS', ''),
                                                               self.distribution.get_version())
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
         subprocess.check_call(['cmake', ext.sourcedir] + cmake_args, cwd=self.build_temp, env=env)
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
+        # status,result=subprocess.getstatusoutput('echo "pha here PWD: $PWD"')
+        # print(result)
+        # status,result=subprocess.getstatusoutput('echo "pha here PREFIX: $PREFIX"')
+        # print(result)
+        # status,result=subprocess.getstatusoutput('echo "pha here CMAKE_INSTALL_PREFIX: $CMAKE_INSTALL_PREFIX"')
+        # print(result)
+        # status,result=subprocess.getstatusoutput('ls -R $PREFIX/*')
+        # print(result)
+        subprocess.check_call(['make', 'install'], cwd=self.build_temp)
+
 
 setup(
-    name='thread_tools',
+    name='make_unique',
+    packages=['make_unique'],
     version='0.1',
     author='Phil Austin',
     author_email='paustin@eos.ubc.ca',
     description='A test project using pybind11 and CMake',
     long_description='',
-    ext_modules=[CMakeExtension('thread_tools')],
+    ext_modules=[CMakeExtension('make_unique')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
 )
