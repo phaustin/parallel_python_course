@@ -39,13 +39,15 @@ class CMakeBuild(build_ext):
         cmake_path=str(Path(sys.exec_prefix) / Path('share/cmake/pybind11'))
         xtensor_path=str(Path(sys.exec_prefix) / Path('share/cmake/xtensor'))
         numpy_path=numpy.get_include()
-        cmake_path=cmake_path + ";" + xtensor_path + ";${CMAKE_MODULE_PATH}"
+        cmake_path=cmake_path + ";" + xtensor_path
         extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
+        print('pha names: ',ext.name,extdir)
         cmake_args = ['-DNUMPY_INCLUDE=' + numpy_path,
               '-DCONDA_CMAKE=' + cmake_path,
               '-DCFFI_INCLUDE=' + cp_paths['includedir'],
               '-DCFFI_LIB=' + cp_paths['libfile'],
               '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
+              '-DCMAKE_MODULE_NAME=' + ext.name,
               '-DPYTHON_EXECUTABLE=' + sys.executable]
         print(f"calling cmake with {' '.join(cmake_args)}")
         cfg = 'Debug' if self.debug else 'Release'
@@ -69,13 +71,13 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.'] + build_args, cwd=self.build_temp)
 
 setup(
-    name='thread_tools',
+    name='cpp_thread_tools',
     version='0.1',
     author='Phil Austin',
     author_email='paustin@eos.ubc.ca',
     description='A test project using pybind11 and CMake',
     long_description='',
-    ext_modules=[CMakeExtension('thread_tools')],
+    ext_modules=[CMakeExtension('cpp_thread_tools')],
     cmdclass=dict(build_ext=CMakeBuild),
     zip_safe=False,
 )
