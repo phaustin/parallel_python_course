@@ -1,0 +1,42 @@
+package:
+  name: 'cpp_make_unique'
+  version: 0.1
+
+build:
+  number: 0.1
+  script_env:
+    - CC
+    - CXX
+
+source:
+  path: ../
+
+requirements:
+  build:
+    - python
+    - setuptools
+    - pybind11 ==2.3
+    - numpy    <1.12.2
+    - xtensor-python ==0.13
+    - cmake
+    - numpy
+
+  run:
+    - python
+    - vs2015_runtime  # [win]
+    - numpy
+
+test:
+  requires:
+    - pytest
+    
+  files:
+    - ../tests/test_pha.py
+    - ../tests/__init__.py
+    
+  imports:
+    - 'cpp_make_unique'
+
+about:
+  summary: An example project built with pybind11.
+  license_file: LICENSE
