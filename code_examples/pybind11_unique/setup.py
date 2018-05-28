@@ -34,6 +34,7 @@ class CMakeBuild(build_ext):
             self.build_extension(ext)
 
     def build_extension(self, ext):
+        print("pha: is this working for me?")
         cmake_path=str(Path(sys.exec_prefix) / Path('share/cmake/pybind11'))
         xtensor_path=str(Path(sys.exec_prefix) / Path('share/cmake/xtensor'))
         numpy_path=numpy.get_include()
@@ -41,7 +42,6 @@ class CMakeBuild(build_ext):
         extdir = os.path.abspath(os.path.dirname(self.get_ext_fullpath(ext.name)))
         cmake_args = ['-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=' + extdir,
                       '-DPYTHON_EXECUTABLE=' + sys.executable,
-                      '-DCONDA_CMAKE=' + cmake_path,
                       '-DNUMPY_INCLUDE=' + numpy_path
         ]
 
@@ -60,6 +60,7 @@ class CMakeBuild(build_ext):
         env = os.environ.copy()
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(env.get('CXXFLAGS', ''),
                                                               self.distribution.get_version())
+        print(f'pha debug: here is temp dir {self.build_temp}')
         if not os.path.exists(self.build_temp):
             os.makedirs(self.build_temp)
         subprocess.check_call(['cmake', ext.sourcedir] + cmake_args, cwd=self.build_temp, env=env)
