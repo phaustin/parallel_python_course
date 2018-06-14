@@ -1,5 +1,5 @@
 project(cffi_funs)
-set(CMAKE_CXX_COMPILER $CXX)
+#set(CMAKE_CXX_COMPILER $CXX)
 cmake_minimum_required(VERSION 3.8)
 #call with cmake  -DCMAKE_INSTALL_PREFIX=$PREFIX $SRC_DIR
 message("here is install directory: ${CMAKE_INSTALL_PREFIX}")
