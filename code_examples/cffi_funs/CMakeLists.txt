@@ -1,9 +1,9 @@
 project(cffi_funs)
-set(CMAKE_CXX_COMPILER /global/software/gcc-5.2.0-rpath/bin/g++)
+set(CMAKE_CXX_COMPILER $CXX)
 cmake_minimum_required(VERSION 3.8)
 #call with cmake  -DCMAKE_INSTALL_PREFIX=$PREFIX $SRC_DIR
 message("here is install directory: ${CMAKE_INSTALL_PREFIX}")
-set(CMAKE_C_COMPILER /global/software/gcc-5.2.0-rpath/bin/gcc)
+set(CMAKE_C_COMPILER $CC)
 set(CMAKE_CXX_STANDARD 14) # C++11...
 set(CMAKE_CXX_STANDARD_REQUIRED ON) #...is required...
 set(CMAKE_CXX_EXTENSIONS OFF) #...without compiler extensions like gnu++11
