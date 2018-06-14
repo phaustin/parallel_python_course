@@ -1,11 +1,13 @@
 # import version for use by setup.py
 from ._version import version_info, __version__  # noqa: F401 imported but unused
 from pathlib import Path
+import pdb
 import os
 import pdb
 
 def get_paths(*args, **kwargs):
     binpath=Path(os.environ['CONDA_PREFIX'])
+<<<<<<< HEAD
     libfile= binpath / Path('lib/libcffi_funs.so')
     libdir= binpath / Path('lib')
     pdb.set_trace()
@@ -28,5 +30,11 @@ def get_paths(*args, **kwargs):
             break
     else:
         out_dict=dict(libfile=str(libfile),libdir=str(libdir),includedir=str(includedir))
+=======
+    libfile= binpath/ Path('lib/libcffi_funs.so')
+    libdir= binpath / Path('lib')
+    includedir = binpath / Path('include')
+    out_dict=dict(libfile=str(libfile),libdir=str(libdir),includedir=str(includedir))
+>>>>>>> checkpoint
     return out_dict
 

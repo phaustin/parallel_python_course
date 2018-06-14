@@ -9,7 +9,9 @@ import numpy
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 from distutils.version import LooseVersion
-import cffi_practice as cp
+import context
+
+import westgrid.cffi_practice as cp
 
 
 class CMakeExtension(Extension):

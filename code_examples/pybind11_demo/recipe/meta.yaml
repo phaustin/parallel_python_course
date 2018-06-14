@@ -12,16 +12,25 @@ requirements:
   build:
     - python
     - setuptools
-    - pybind11 ==2.3
+    - pybind11 ==2.2.3
     - cmake
-    - numpy    <1.12.2
-    - xtensor-python ==0.13
-    - cffi_practice
+    - numpy  
+    - xtensor-python ==0.18.0
+    - cffi_funs
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
 
+  host:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - xtensor-python
+    - cffi_funs
+    
   run:
     - python
-    - vs2015_runtime  # [win]
-    - cffi_practice
+    - cffi_funs
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
 
 about:
   summary: An example project built with pybind11.
