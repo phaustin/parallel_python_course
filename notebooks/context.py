@@ -1,5 +1,12 @@
 """
 http://docs.python-guide.org/en/latest/writing/structure
+
+import context
+
+will add the directory that contains this file to the front of sys.path
+This allows notebooks to work with packages stored in subdirectories of the
+notebook folder
+
 """
 import sys
 import site
