@@ -2,15 +2,18 @@
 from ._version import version_info, __version__  # noqa: F401 imported but unused
 from pathlib import Path
 import os
+import pdb
 
 def get_paths(*args, **kwargs):
     binpath=Path(os.environ['CONDA_PREFIX'])
-    libfile=Path.joinpath(binpath.parent,Path('lib/libcffi_funs.so'))
-    libdir=Path.joinpath(binpath.parent,Path('lib'))
+    libfile= binpath / Path('lib/libcffi_funs.so')
+    libdir= binpath / Path('lib')
+    pdb.set_trace()
     #
     # find either libcffi_funs.so or libcffi_funs.dll
     #
     library=list(libdir.glob('libcffi_funs.*'))
+    
     if len(library) > 1:
         raise ImportError('found more than one libcffi_funs library')
     try:
