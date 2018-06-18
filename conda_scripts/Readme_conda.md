@@ -25,13 +25,13 @@ where condap appears earlier in your .bashrc and looks like this:
 
     ```bash
     function condap()
-    {
-    #the_name=$(hostname) -- Linux, use next line for Macs
-    the_name=$(scutil --get LocalHostName)
-    out=`basename $CONDA_PREFIX`
-    unset PS1
-    PS1="\w ${out} \u@${the_name}\n% "
-    }
+     {
+      #the_name=$(hostname) -- Linux, use next line for Macs
+      the_name=$(scutil --get LocalHostName)
+      out=`basename $CONDA_PREFIX`
+      unset PS1
+      PS1="\w ${out} \u@${the_name}\n% "
+     }
     ```
     
 this gives you a prompt that reminds you want conda environment you are in
