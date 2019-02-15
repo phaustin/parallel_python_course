@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "ens",
+        "z"
+    ],
+    "long_name": "pressure",
+    "units": "mb"
+}

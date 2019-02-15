@@ -1,0 +1,10 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "ens",
+        "z",
+        "y",
+        "x"
+    ],
+    "long_name": "Z Wind Component",
+    "units": "m/s"
+}
