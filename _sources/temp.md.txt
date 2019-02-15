@@ -1,0 +1,38 @@
+# First step: Installing python dependencies
+
+* All the code used in the tutorial can be run on a Windows, Mac, or Linux laptop
+
+* Please do the following prior to the tutorial:
+
+  * Download and install https://conda.io/miniconda.html on your laptop, accepting all
+    the defaults for the install (I specified an install into a folder named ma36 below):
+  
+  * If you are running on Windows:
+    * Press the &#8862; Win key to open a cmd shell and type:
+           anaconda prompt
+      
+      This should launch a cmd shell that we can use to install other packages
+      
+      To test your installation, type 
+      
+            conda list
+            
+      at the prompt, which should show you a list of installed packages starting with:
+      
+            (base) C:\Users\paust>conda list
+            # packages in environment at C:\Users\paust\ma36:  
+      
+    * If you are running MacOS or Linux, after the install launch a bash shell, hopefully
+      when you type:
+
+            conda list
+
+      you will see output that looks like:
+
+
+            % conda list
+            # packages in environment at /Users/phil/mb36:
+            #
+            # Name                    Version                   Build  Channel
+
+

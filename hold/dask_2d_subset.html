@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Real data &#8212; E213</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Home</a>
+        <span class="navbar-text navbar-version pull-left"><b>2019Jan01</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro.html">00 - Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../00_intro.html#first-steps">First steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#installing-python">Installing python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#installing-extra-dependencies">Installing extra dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../00_intro.html#course-objectives">Course objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_intro.html#motivation-editorial">Motivation (editorial)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#concurrency-vs-parallelism">Concurrency vs.&nbsp;parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#threads-and-processes">Threads and processes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../00_intro.html#threads-and-processes-in-python">Threads and processes in Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../00_intro.html#python-global-intepreter-lock">Python global intepreter lock</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#thread-scheduling">Thread scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../00_intro.html#note-that-these-three-threads-are-taking-turns-resulting-in-a-computation-that-runs-slightly-slower-because-of-overhead-than-running-on-a-single-thread">Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#releasing-the-gil">Releasing the GIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../01_joblib.html">01 - Introduction to joblib</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01_joblib.html#Creating-a-process-or-thread-pool-with-joblib">Creating a process or thread pool with joblib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Running-a-threadsafe-function">Running a threadsafe function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Setup-logging-so-we-can-know-what-process-and-thread-we-are-running">Setup logging so we can know what process and thread we are running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Create-two-functions,-one-to-print-thread-and-process-ids,-and-one-to-run-the-wait_for-loop">Create two functions, one to print thread and process ids, and one to run the wait_for loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Now-repeat-this-holding-the-GIL">Now repeat this holding the GIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Now-repeat-with-processes-instead-of-threads">Now repeat with processes instead of threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../02_xarray_zarr.html">02: xarray, netcdf and zarr</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#The-current-defacto-standard-in-atmos/ocean-science">The current defacto standard in atmos/ocean science</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Some-challenges-with-netcdf">Some challenges with netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#create-an-xarray">create an xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Download-toy-model-data">Download toy model data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Sort-in-numeric-order">Sort in numeric order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Make-an-xarray">Make an xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Dump-to-a-zarr-file">Dump to a zarr file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03_dask_and_zarr.html#zarr">zarr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_dask_and_zarr.html#dask">dask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Example,-write-and-read-zarr-arrays-using-multiple-threads">Example, write and read zarr arrays using multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Create-230-Mbytes-of-fake-data">Create 230 Mbytes of fake data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Copy-to-a-zarr-file-on-disk,-using-multiple-threads">Copy to a zarr file on disk, using multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Add-some-attributes">Add some attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Create-an-array-of-zeros-–-note-that-compression-shrinks-it-from-230-Mbytes-to-321-bytes">Create an array of zeros – note that compression shrinks it from 230 Mbytes to 321 bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#copy-input-to-output-using-chunks">copy input to output using chunks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Create-a-dask-array-from-a-zarr-disk-file">Create a dask array from a zarr disk file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#The-following-calculation-uses-numpy,-so-it-releases-the-GIL">The following calculation uses numpy, so it releases the GIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Note-that-result-hasn’t-been-computed-yet">Note that result hasn’t been computed yet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Now-do-the-calculation">Now do the calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#You-can-evaluate-your-own-functions-on-dask-arrays">You can evaluate your own functions on dask arrays</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../04_numba.html">04 - Using numba to release the GIL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#Timing-python-code">Timing python code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../04_numba.html#Define-a-function-that-does-a-lot-of-computation">Define a function that does a lot of computation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../04_numba.html#now-time-it-with-pure-python">now time it with pure python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#Now-try-this-with-numba">Now try this with numba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#Make-two-identical-functions:-one-that-releases-and-one-that-holds-the-GIL">Make two identical functions: one that releases and one that holds the GIL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#now-time-wait_loop_withgil">now time wait_loop_withgil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#not-bad,-but-we’re-only-using-one-core">not bad, but we’re only using one core</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05_cffi.html#Accessing-the-functions-from-python-using-CFFI">Accessing the functions from python using CFFI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../05_cffi.html#Running-this-in-a-threadpool">Running this in a threadpool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro.html">00 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_joblib.html">01 - Introduction to joblib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_xarray_zarr.html">02: xarray, netcdf and zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_numba.html">04 - Using numba to release the GIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/hold/dask_2d_subset.ipynb.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro.html">00 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_joblib.html">01 - Introduction to joblib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_xarray_zarr.html">02: xarray, netcdf and zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_numba.html">04 - Using numba to release the GIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 7ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<h1><p>Table of Contents</p>
+</h1><div class="toc"><ul class="toc-item"><li><p>1&nbsp;&nbsp;Real data</p>
+</li><li><p>2&nbsp;&nbsp;Synthetic data</p>
+</li></ul></div><p>This notebook has some profiling of Dask used to make a selection along both first and second axes of a large-ish multidimensional array. The use case is making selections of genotype data, e.g., as required for making a web-browser for genotype data as in www.malariagen.net/apps/ag1000g.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">zarr</span><span class="p">;</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;zarr&#39;</span><span class="p">,</span> <span class="n">zarr</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">dask</span><span class="p">;</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;dask&#39;</span><span class="p">,</span> <span class="n">dask</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">dask.array</span> <span class="kn">as</span> <span class="nn">da</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+zarr 2.2.0
+dask 0.17.2
+</pre></div></div>
+</div>
+<div class="section" id="Real-data">
+<h1>Real data<a class="headerlink" href="#Real-data" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># here&#39;s the real data</span>
+<span class="n">callset</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open_group</span><span class="p">(</span><span class="s1">&#39;/kwiat/2/coluzzi/ag1000g/data/phase1/release/AR3.1/variation/main/zarr2/zstd/ag1000g.phase1.ar3&#39;</span><span class="p">,</span>
+                          <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">callset</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-2-0aac3051dbd2&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-red-fg"># here&#39;s the real data</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> callset = zarr.open_group(&#39;/kwiat/2/coluzzi/ag1000g/data/phase1/release/AR3.1/variation/main/zarr2/zstd/ag1000g.phase1.ar3&#39;,
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg">                           mode=&#39;r&#39;)
+</span><span class="ansi-green-intense-fg ansi-bold">      4</span> callset
+
+<span class="ansi-green-fg">~/mb36/lib/python3.6/site-packages/zarr/hierarchy.py</span> in <span class="ansi-cyan-fg">open_group</span><span class="ansi-blue-fg">(store, mode, cache_attrs, synchronizer, path)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1111</span>             err_contains_array<span class="ansi-blue-fg">(</span>path<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1112</span>         <span class="ansi-green-fg">elif</span> <span class="ansi-green-fg">not</span> contains_group<span class="ansi-blue-fg">(</span>store<span class="ansi-blue-fg">,</span> path<span class="ansi-blue-fg">=</span>path<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-&gt; 1113</span><span class="ansi-red-fg">             </span>err_group_not_found<span class="ansi-blue-fg">(</span>path<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1114</span>
+<span class="ansi-green-intense-fg ansi-bold">   1115</span>     <span class="ansi-green-fg">elif</span> mode <span class="ansi-blue-fg">==</span> <span class="ansi-blue-fg">&#39;w&#39;</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/mb36/lib/python3.6/site-packages/zarr/errors.py</span> in <span class="ansi-cyan-fg">err_group_not_found</span><span class="ansi-blue-fg">(path)</span>
+<span class="ansi-green-intense-fg ansi-bold">     27</span>
+<span class="ansi-green-intense-fg ansi-bold">     28</span> <span class="ansi-green-fg">def</span> err_group_not_found<span class="ansi-blue-fg">(</span>path<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">---&gt; 29</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">raise</span> ValueError<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;group not found at path %r&#39;</span> <span class="ansi-blue-fg">%</span> path<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     30</span>
+<span class="ansi-green-intense-fg ansi-bold">     31</span>
+
+<span class="ansi-red-fg">ValueError</span>: group not found at path &#39;&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># here&#39;s the array we&#39;re going to work with</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;3R/calldata/genotype&#39;</span><span class="p">]</span>
+<span class="n">g</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Array(/3R/calldata/genotype, (22632425, 765, 2), int8, chunks=(13107, 40, 2), order=C)
+  nbytes: 32.2G; nbytes_stored: 1.0G; ratio: 31.8; initialized: 34540/34540
+  compressor: Blosc(cname=&#39;zstd&#39;, clevel=1, shuffle=2)
+  store: DirectoryStore
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># wrap as dask array with very simple chunking of first dim only</span>
+<span class="o">%</span><span class="k">time</span> gd = da.from_array(g, chunks=(g.chunks[0], None, None))
+<span class="n">gd</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 4 ms, sys: 0 ns, total: 4 ms
+Wall time: 5.13 ms
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>dask.array&lt;array-b..., shape=(22632425, 765, 2), dtype=int8, chunksize=(13107, 765, 2)&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># load condition used to make selection on first axis</span>
+<span class="n">dim0_condition</span> <span class="o">=</span> <span class="n">callset</span><span class="p">[</span><span class="s1">&#39;3R/variants/FILTER_PASS&#39;</span><span class="p">][:]</span>
+<span class="n">dim0_condition</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dim0_condition</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">count_nonzero</span><span class="p">(</span><span class="n">dim0_condition</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>((22632425,), dtype(&#39;bool&#39;), 13167162)
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># invent a random selection for second axis</span>
+<span class="n">dim1_indices</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">765</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># setup the 2D selection - this is the slow bit</span>
+<span class="o">%</span><span class="k">time</span> gd_sel = gd[dim0_condition][:, dim1_indices]
+<span class="n">gd_sel</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 15.3 s, sys: 256 ms, total: 15.5 s
+Wall time: 15.5 s
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>dask.array&lt;getitem..., shape=(13167162, 100, 2), dtype=int8, chunksize=(8873, 100, 2)&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># now load a slice from this new selection - quick!</span>
+<span class="o">%</span><span class="k">time</span> gd_sel[1000000:1100000].compute(optimize_graph=False)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 1.21 s, sys: 152 ms, total: 1.36 s
+Wall time: 316 ms
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>array([[[0, 0],
+        [0, 0],
+        [0, 0],
+        ...,
+        [0, 0],
+        [0, 0],
+        [0, 0]],
+
+       [[0, 0],
+        [0, 0],
+        [0, 0],
+        ...,
+        [0, 0],
+        [0, 0],
+        [0, 0]],
+
+       [[0, 0],
+        [0, 0],
+        [0, 0],
+        ...,
+        [0, 0],
+        [0, 0],
+        [0, 0]],
+
+       ...,
+       [[0, 0],
+        [0, 0],
+        [0, 0],
+        ...,
+        [0, 1],
+        [0, 0],
+        [0, 0]],
+
+       [[0, 0],
+        [0, 0],
+        [0, 0],
+        ...,
+        [0, 0],
+        [0, 0],
+        [0, 0]],
+
+       [[0, 0],
+        [0, 0],
+        [0, 0],
+        ...,
+        [0, 0],
+        [0, 0],
+        [0, 0]]], dtype=int8)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># what&#39;s taking so long?</span>
+<span class="kn">import</span> <span class="nn">cProfile</span>
+<span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;gd[dim0_condition][:, dim1_indices]&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+         105406881 function calls (79072145 primitive calls) in 26.182 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+13167268/6    6.807    0.000    9.038    1.506 slicing.py:623(check_index)
+        2    4.713    2.356    5.831    2.916 slicing.py:398(partition_by_size)
+13167270/2    4.470    0.000    8.763    4.382 slicing.py:540(posify_index)
+ 52669338    4.118    0.000    4.119    0.000 {built-in method builtins.isinstance}
+        2    2.406    1.203    8.763    4.382 slicing.py:563(&lt;listcomp&gt;)
+        1    0.875    0.875    0.875    0.875 slicing.py:44(&lt;listcomp&gt;)
+ 13182474    0.600    0.000    0.600    0.000 {built-in method builtins.len}
+        2    0.527    0.264    0.527    0.264 slicing.py:420(issorted)
+ 13189168    0.520    0.000    0.520    0.000 {method &#39;append&#39; of &#39;list&#39; objects}
+        2    0.271    0.136    0.271    0.136 slicing.py:479(&lt;listcomp&gt;)
+        2    0.220    0.110    0.220    0.110 {built-in method builtins.sorted}
+        1    0.162    0.162    0.162    0.162 {method &#39;tolist&#39; of &#39;numpy.ndarray&#39; objects}
+        2    0.113    0.056   26.071   13.035 core.py:1024(__getitem__)
+        2    0.112    0.056    6.435    3.217 slicing.py:441(take_sorted)
+        1    0.111    0.111   26.182   26.182 &lt;string&gt;:1(&lt;module&gt;)
+        2    0.060    0.030   24.843   12.422 slicing.py:142(slice_with_newaxes)
+    106/3    0.039    0.000    1.077    0.359 slicing.py:15(sanitize_index)
+        3    0.037    0.012    0.037    0.012 {built-in method _hashlib.openssl_md5}
+     6726    0.012    0.000    0.017    0.000 slicing.py:567(insert_many)
+     3364    0.004    0.000    0.021    0.000 slicing.py:156(&lt;genexpr&gt;)
+    20178    0.003    0.000    0.003    0.000 {method &#39;pop&#39; of &#39;list&#39; objects}
+        8    0.000    0.000    0.000    0.000 {method &#39;update&#39; of &#39;dict&#39; objects}
+        2    0.000    0.000   25.920   12.960 slicing.py:60(slice_array)
+        2    0.000    0.000    0.000    0.000 slicing.py:162(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:464(&lt;listcomp&gt;)
+    106/4    0.000    0.000    0.037    0.009 utils.py:502(__call__)
+      100    0.000    0.000    0.000    0.000 arrayprint.py:340(array2string)
+        2    0.000    0.000    0.037    0.019 base.py:343(tokenize)
+      100    0.000    0.000    0.000    0.000 {built-in method builtins.repr}
+        2    0.000    0.000   24.763   12.381 slicing.py:170(slice_wrap_lists)
+      108    0.000    0.000    0.000    0.000 abc.py:178(__instancecheck__)
+        2    0.000    0.000    6.962    3.481 slicing.py:487(take)
+        1    0.000    0.000   26.182   26.182 {built-in method builtins.exec}
+        2    0.000    0.000    0.000    0.000 slicing.py:465(&lt;listcomp&gt;)
+        1    0.000    0.000    0.037    0.037 base.py:314(normalize_array)
+      2/1    0.000    0.000    0.000    0.000 base.py:270(normalize_seq)
+      116    0.000    0.000    0.000    0.000 _weakrefset.py:70(__contains__)
+      100    0.000    0.000    0.000    0.000 numeric.py:1835(array_str)
+        1    0.000    0.000    0.000    0.000 slicing.py:47(&lt;listcomp&gt;)
+        6    0.000    0.000    0.000    0.000 {built-in method builtins.sum}
+        2    0.000    0.000    0.000    0.000 exceptions.py:15(merge)
+      100    0.000    0.000    0.000    0.000 inspect.py:441(getmro)
+        2    0.000    0.000    0.000    0.000 slicing.py:475(&lt;listcomp&gt;)
+        4    0.000    0.000    0.000    0.000 dicttoolz.py:19(merge)
+        4    0.000    0.000    0.000    0.000 functoolz.py:217(__call__)
+        2    0.000    0.000    0.000    0.000 core.py:1455(normalize_chunks)
+        4    0.000    0.000    0.000    0.000 dicttoolz.py:11(_get_factory)
+        2    0.000    0.000    0.000    0.000 slicing.py:467(&lt;listcomp&gt;)
+      100    0.000    0.000    0.000    0.000 {method &#39;item&#39; of &#39;numpy.ndarray&#39; objects}
+        2    0.000    0.000    0.000    0.000 core.py:794(__init__)
+        8    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        8    0.000    0.000    0.000    0.000 slicing.py:197(&lt;genexpr&gt;)
+        8    0.000    0.000    0.000    0.000 slicing.py:183(&lt;genexpr&gt;)
+        5    0.000    0.000    0.000    0.000 core.py:1043(&lt;genexpr&gt;)
+        7    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        5    0.000    0.000    0.000    0.000 slicing.py:125(&lt;genexpr&gt;)
+        1    0.000    0.000    0.000    0.000 {method &#39;view&#39; of &#39;numpy.ndarray&#39; objects}
+        2    0.000    0.000    0.000    0.000 slicing.py:192(&lt;listcomp&gt;)
+        3    0.000    0.000    0.000    0.000 {method &#39;hexdigest&#39; of &#39;_hashlib.HASH&#39; objects}
+        2    0.000    0.000    0.000    0.000 slicing.py:606(replace_ellipsis)
+        2    0.000    0.000    0.000    0.000 slicing.py:613(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 {method &#39;ravel&#39; of &#39;numpy.ndarray&#39; objects}
+        4    0.000    0.000    0.000    0.000 {method &#39;items&#39; of &#39;dict&#39; objects}
+        2    0.000    0.000    0.000    0.000 {method &#39;encode&#39; of &#39;str&#39; objects}
+        8    0.000    0.000    0.000    0.000 slicing.py:207(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 core.py:826(_get_chunks)
+        2    0.000    0.000    0.000    0.000 core.py:1452(&lt;lambda&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:149(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:150(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 functoolz.py:11(identity)
+        4    0.000    0.000    0.000    0.000 {method &#39;pop&#39; of &#39;dict&#39; objects}
+        1    0.000    0.000    0.000    0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
+        2    0.000    0.000    0.000    0.000 {method &#39;count&#39; of &#39;tuple&#39; objects}
+
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;gd[dim0_condition][:, dim1_indices]&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;cumtime&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+         105406881 function calls (79072145 primitive calls) in 25.630 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   25.630   25.630 {built-in method builtins.exec}
+        1    0.107    0.107   25.630   25.630 &lt;string&gt;:1(&lt;module&gt;)
+        2    0.102    0.051   25.523   12.761 core.py:1024(__getitem__)
+        2    0.001    0.000   25.381   12.691 slicing.py:60(slice_array)
+        2    0.049    0.024   24.214   12.107 slicing.py:142(slice_with_newaxes)
+        2    0.000    0.000   24.147   12.073 slicing.py:170(slice_wrap_lists)
+13167268/6    6.664    0.000    8.855    1.476 slicing.py:623(check_index)
+13167270/2    4.354    0.000    8.466    4.233 slicing.py:540(posify_index)
+        2    2.277    1.139    8.465    4.233 slicing.py:563(&lt;listcomp&gt;)
+        2    0.000    0.000    6.826    3.413 slicing.py:487(take)
+        2    0.111    0.056    6.331    3.165 slicing.py:441(take_sorted)
+        2    4.628    2.314    5.704    2.852 slicing.py:398(partition_by_size)
+ 52669338    4.026    0.000    4.026    0.000 {built-in method builtins.isinstance}
+    106/3    0.071    0.001    1.167    0.389 slicing.py:15(sanitize_index)
+        1    0.943    0.943    0.943    0.943 slicing.py:44(&lt;listcomp&gt;)
+ 13182474    0.581    0.000    0.581    0.000 {built-in method builtins.len}
+ 13189168    0.497    0.000    0.497    0.000 {method &#39;append&#39; of &#39;list&#39; objects}
+        2    0.495    0.248    0.495    0.248 slicing.py:420(issorted)
+        2    0.281    0.141    0.281    0.141 slicing.py:479(&lt;listcomp&gt;)
+        2    0.234    0.117    0.234    0.117 {built-in method builtins.sorted}
+        1    0.152    0.152    0.152    0.152 {method &#39;tolist&#39; of &#39;numpy.ndarray&#39; objects}
+        2    0.000    0.000    0.039    0.020 base.py:343(tokenize)
+    106/4    0.000    0.000    0.039    0.010 utils.py:502(__call__)
+        1    0.000    0.000    0.039    0.039 base.py:314(normalize_array)
+        3    0.039    0.013    0.039    0.013 {built-in method _hashlib.openssl_md5}
+     3364    0.003    0.000    0.019    0.000 slicing.py:156(&lt;genexpr&gt;)
+     6726    0.012    0.000    0.016    0.000 slicing.py:567(insert_many)
+    20178    0.003    0.000    0.003    0.000 {method &#39;pop&#39; of &#39;list&#39; objects}
+        4    0.000    0.000    0.000    0.000 dicttoolz.py:19(merge)
+        8    0.000    0.000    0.000    0.000 {method &#39;update&#39; of &#39;dict&#39; objects}
+        4    0.000    0.000    0.000    0.000 functoolz.py:217(__call__)
+        2    0.000    0.000    0.000    0.000 exceptions.py:15(merge)
+      2/1    0.000    0.000    0.000    0.000 base.py:270(normalize_seq)
+        2    0.000    0.000    0.000    0.000 slicing.py:162(&lt;genexpr&gt;)
+      100    0.000    0.000    0.000    0.000 {built-in method builtins.repr}
+        1    0.000    0.000    0.000    0.000 slicing.py:47(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:464(&lt;listcomp&gt;)
+      100    0.000    0.000    0.000    0.000 numeric.py:1835(array_str)
+      100    0.000    0.000    0.000    0.000 arrayprint.py:340(array2string)
+      108    0.000    0.000    0.000    0.000 abc.py:178(__instancecheck__)
+        2    0.000    0.000    0.000    0.000 slicing.py:465(&lt;listcomp&gt;)
+        8    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        2    0.000    0.000    0.000    0.000 core.py:794(__init__)
+      116    0.000    0.000    0.000    0.000 _weakrefset.py:70(__contains__)
+        2    0.000    0.000    0.000    0.000 core.py:1455(normalize_chunks)
+        6    0.000    0.000    0.000    0.000 {built-in method builtins.sum}
+        8    0.000    0.000    0.000    0.000 slicing.py:183(&lt;genexpr&gt;)
+      100    0.000    0.000    0.000    0.000 {method &#39;item&#39; of &#39;numpy.ndarray&#39; objects}
+      100    0.000    0.000    0.000    0.000 inspect.py:441(getmro)
+        2    0.000    0.000    0.000    0.000 {method &#39;encode&#39; of &#39;str&#39; objects}
+        2    0.000    0.000    0.000    0.000 slicing.py:606(replace_ellipsis)
+        2    0.000    0.000    0.000    0.000 slicing.py:475(&lt;listcomp&gt;)
+        5    0.000    0.000    0.000    0.000 slicing.py:125(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:467(&lt;listcomp&gt;)
+        3    0.000    0.000    0.000    0.000 {method &#39;hexdigest&#39; of &#39;_hashlib.HASH&#39; objects}
+        1    0.000    0.000    0.000    0.000 {method &#39;view&#39; of &#39;numpy.ndarray&#39; objects}
+        2    0.000    0.000    0.000    0.000 slicing.py:192(&lt;listcomp&gt;)
+        4    0.000    0.000    0.000    0.000 dicttoolz.py:11(_get_factory)
+        5    0.000    0.000    0.000    0.000 core.py:1043(&lt;genexpr&gt;)
+        7    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        8    0.000    0.000    0.000    0.000 slicing.py:207(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:613(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:149(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 {method &#39;ravel&#39; of &#39;numpy.ndarray&#39; objects}
+        8    0.000    0.000    0.000    0.000 slicing.py:197(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 core.py:826(_get_chunks)
+        2    0.000    0.000    0.000    0.000 core.py:1452(&lt;lambda&gt;)
+        4    0.000    0.000    0.000    0.000 {method &#39;pop&#39; of &#39;dict&#39; objects}
+        4    0.000    0.000    0.000    0.000 {method &#39;items&#39; of &#39;dict&#39; objects}
+        2    0.000    0.000    0.000    0.000 slicing.py:150(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 {method &#39;count&#39; of &#39;tuple&#39; objects}
+        1    0.000    0.000    0.000    0.000 functoolz.py:11(identity)
+        1    0.000    0.000    0.000    0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
+
+
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Synthetic-data">
+<h1>Synthetic data<a class="headerlink" href="#Synthetic-data" title="Permalink to this headline">¶</a></h1>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># create a synthetic dataset for profiling</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">20000000</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;i1&#39;</span><span class="p">),</span>
+               <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">compressor</span><span class="o">=</span><span class="n">zarr</span><span class="o">.</span><span class="n">Blosc</span><span class="p">(</span><span class="n">cname</span><span class="o">=</span><span class="s1">&#39;zstd&#39;</span><span class="p">,</span> <span class="n">clevel</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>Array((20000000, 200, 2), int8, chunks=(10000, 100, 2), order=C)
+  nbytes: 7.5G; nbytes_stored: 2.7G; ratio: 2.8; initialized: 4000/4000
+  compressor: Blosc(cname=&#39;zstd&#39;, clevel=1, shuffle=2)
+  store: dict
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># create a synthetic selection for first axis</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># create a synthetic selection for second axis</span>
+<span class="n">s</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">time</span> d = da.from_array(a, chunks=(a.chunks[0], None, None))
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 208 ms, sys: 0 ns, total: 208 ms
+Wall time: 206 ms
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>dask.array&lt;array-5..., shape=(20000000, 200, 2), dtype=int8, chunksize=(10000, 200, 2)&gt;
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">time</span> ds = d[c][:, s]
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 12 s, sys: 200 ms, total: 12.2 s
+Wall time: 12.2 s
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;d[c][:, s]&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+         80095589 function calls (60091843 primitive calls) in 19.467 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+10001773/6    4.872    0.000    6.456    1.076 slicing.py:623(check_index)
+        2    3.517    1.758    4.357    2.179 slicing.py:398(partition_by_size)
+10001775/2    3.354    0.000    6.484    3.242 slicing.py:540(posify_index)
+ 40007358    2.965    0.000    2.965    0.000 {built-in method builtins.isinstance}
+        2    1.749    0.875    6.484    3.242 slicing.py:563(&lt;listcomp&gt;)
+        1    0.878    0.878    0.878    0.878 slicing.py:44(&lt;listcomp&gt;)
+ 10019804    0.451    0.000    0.451    0.000 {built-in method builtins.len}
+ 10027774    0.392    0.000    0.392    0.000 {method &#39;append&#39; of &#39;list&#39; objects}
+        2    0.363    0.181    0.363    0.181 slicing.py:420(issorted)
+        2    0.270    0.135    4.786    2.393 slicing.py:441(take_sorted)
+        1    0.207    0.207    0.207    0.207 {method &#39;tolist&#39; of &#39;numpy.ndarray&#39; objects}
+        2    0.158    0.079    0.158    0.079 {built-in method builtins.sorted}
+        1    0.094    0.094   19.467   19.467 &lt;string&gt;:1(&lt;module&gt;)
+        2    0.079    0.040   19.373    9.686 core.py:1024(__getitem__)
+        2    0.035    0.017   18.147    9.074 slicing.py:142(slice_with_newaxes)
+        3    0.033    0.011    0.033    0.011 {built-in method _hashlib.openssl_md5}
+    106/3    0.028    0.000    1.112    0.371 slicing.py:15(sanitize_index)
+     8002    0.015    0.000    0.020    0.000 slicing.py:567(insert_many)
+     4002    0.004    0.000    0.023    0.000 slicing.py:156(&lt;genexpr&gt;)
+    24006    0.003    0.000    0.003    0.000 {method &#39;pop&#39; of &#39;list&#39; objects}
+        8    0.001    0.000    0.001    0.000 {method &#39;update&#39; of &#39;dict&#39; objects}
+        2    0.001    0.000    0.001    0.000 slicing.py:479(&lt;listcomp&gt;)
+        2    0.000    0.000   19.259    9.630 slicing.py:60(slice_array)
+        2    0.000    0.000    0.000    0.000 slicing.py:162(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:464(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:465(&lt;listcomp&gt;)
+    106/4    0.000    0.000    0.034    0.008 utils.py:502(__call__)
+        2    0.000    0.000   18.089    9.044 slicing.py:170(slice_wrap_lists)
+      100    0.000    0.000    0.000    0.000 arrayprint.py:340(array2string)
+      100    0.000    0.000    0.000    0.000 {built-in method builtins.repr}
+      108    0.000    0.000    0.000    0.000 abc.py:178(__instancecheck__)
+        2    0.000    0.000    5.149    2.574 slicing.py:487(take)
+        2    0.000    0.000    0.034    0.017 base.py:343(tokenize)
+        1    0.000    0.000    0.033    0.033 base.py:314(normalize_array)
+      116    0.000    0.000    0.000    0.000 _weakrefset.py:70(__contains__)
+      2/1    0.000    0.000    0.000    0.000 base.py:270(normalize_seq)
+        6    0.000    0.000    0.000    0.000 {built-in method builtins.sum}
+      100    0.000    0.000    0.000    0.000 numeric.py:1835(array_str)
+        1    0.000    0.000    0.000    0.000 slicing.py:47(&lt;listcomp&gt;)
+        1    0.000    0.000   19.467   19.467 {built-in method builtins.exec}
+      100    0.000    0.000    0.000    0.000 inspect.py:441(getmro)
+        8    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        4    0.000    0.000    0.001    0.000 dicttoolz.py:19(merge)
+        2    0.000    0.000    0.000    0.000 core.py:1455(normalize_chunks)
+      100    0.000    0.000    0.000    0.000 {method &#39;item&#39; of &#39;numpy.ndarray&#39; objects}
+        2    0.000    0.000    0.000    0.000 slicing.py:475(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 core.py:794(__init__)
+        2    0.000    0.000    0.000    0.000 slicing.py:467(&lt;listcomp&gt;)
+        3    0.000    0.000    0.000    0.000 {method &#39;hexdigest&#39; of &#39;_hashlib.HASH&#39; objects}
+        2    0.000    0.000    0.001    0.000 exceptions.py:15(merge)
+        7    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        2    0.000    0.000    0.000    0.000 slicing.py:606(replace_ellipsis)
+        4    0.000    0.000    0.001    0.000 functoolz.py:217(__call__)
+        8    0.000    0.000    0.000    0.000 slicing.py:183(&lt;genexpr&gt;)
+        4    0.000    0.000    0.000    0.000 dicttoolz.py:11(_get_factory)
+        5    0.000    0.000    0.000    0.000 core.py:1043(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 {method &#39;encode&#39; of &#39;str&#39; objects}
+        1    0.000    0.000    0.000    0.000 {method &#39;view&#39; of &#39;numpy.ndarray&#39; objects}
+        8    0.000    0.000    0.000    0.000 slicing.py:197(&lt;genexpr&gt;)
+        5    0.000    0.000    0.000    0.000 slicing.py:125(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:192(&lt;listcomp&gt;)
+        8    0.000    0.000    0.000    0.000 slicing.py:207(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:613(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 {method &#39;count&#39; of &#39;tuple&#39; objects}
+        1    0.000    0.000    0.000    0.000 {method &#39;ravel&#39; of &#39;numpy.ndarray&#39; objects}
+        1    0.000    0.000    0.000    0.000 functoolz.py:11(identity)
+        4    0.000    0.000    0.000    0.000 {method &#39;pop&#39; of &#39;dict&#39; objects}
+        2    0.000    0.000    0.000    0.000 slicing.py:150(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 core.py:826(_get_chunks)
+        2    0.000    0.000    0.000    0.000 core.py:1452(&lt;lambda&gt;)
+        2    0.000    0.000    0.000    0.000 slicing.py:149(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
+        4    0.000    0.000    0.000    0.000 {method &#39;items&#39; of &#39;dict&#39; objects}
+
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="o">%</span><span class="k">time</span> ds[1000000:1100000].compute(optimize_graph=False)
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+CPU times: user 452 ms, sys: 8 ms, total: 460 ms
+Wall time: 148 ms
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area highlight-none notranslate"><div class="highlight"><pre>
+<span></span>array([[[ 2, -1],
+        [ 2,  3],
+        [ 3,  0],
+        ...,
+        [ 1,  3],
+        [-1, -1],
+        [ 1,  1]],
+
+       [[ 1, -1],
+        [ 2,  2],
+        [-1,  2],
+        ...,
+        [ 2, -1],
+        [ 1,  3],
+        [-1, -1]],
+
+       [[ 1, -1],
+        [ 2,  0],
+        [ 0,  3],
+        ...,
+        [ 2,  2],
+        [ 3,  2],
+        [ 0,  2]],
+
+       ...,
+       [[ 1,  2],
+        [ 3, -1],
+        [ 2,  1],
+        ...,
+        [ 1,  2],
+        [ 1,  0],
+        [ 2,  0]],
+
+       [[ 1,  2],
+        [ 1,  0],
+        [ 2,  3],
+        ...,
+        [-1,  2],
+        [ 3,  3],
+        [ 1, -1]],
+
+       [[-1,  3],
+        [ 2,  2],
+        [ 1,  1],
+        ...,
+        [ 3,  3],
+        [ 0,  0],
+        [ 0,  2]]], dtype=int8)
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># problem is in fact just the dim0 selection</span>
+<span class="n">cProfile</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s1">&#39;d[c]&#39;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+         80055494 function calls (60052157 primitive calls) in 19.425 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+10001670/3    5.032    0.000    6.671    2.224 slicing.py:623(check_index)
+        1    3.459    3.459    4.272    4.272 slicing.py:398(partition_by_size)
+10001671/1    3.287    0.000    6.378    6.378 slicing.py:540(posify_index)
+ 40006704    2.999    0.000    2.999    0.000 {built-in method builtins.isinstance}
+        1    1.731    1.731    6.378    6.378 slicing.py:563(&lt;listcomp&gt;)
+        1    0.849    0.849    0.849    0.849 slicing.py:44(&lt;listcomp&gt;)
+ 10011685    0.433    0.000    0.433    0.000 {built-in method builtins.len}
+ 10015670    0.381    0.000    0.381    0.000 {method &#39;append&#39; of &#39;list&#39; objects}
+        1    0.355    0.355    0.355    0.355 slicing.py:420(issorted)
+        1    0.196    0.196    0.196    0.196 {method &#39;tolist&#39; of &#39;numpy.ndarray&#39; objects}
+        1    0.193    0.193    0.193    0.193 slicing.py:479(&lt;listcomp&gt;)
+        1    0.157    0.157    0.157    0.157 {built-in method builtins.sorted}
+        1    0.085    0.085    4.707    4.707 slicing.py:441(take_sorted)
+        1    0.085    0.085   19.425   19.425 &lt;string&gt;:1(&lt;module&gt;)
+        1    0.079    0.079   19.341   19.341 core.py:1024(__getitem__)
+        1    0.034    0.034   18.157   18.157 slicing.py:142(slice_with_newaxes)
+        2    0.033    0.017    0.033    0.017 {built-in method _hashlib.openssl_md5}
+        1    0.026    0.026    1.071    1.071 slicing.py:15(sanitize_index)
+     4001    0.007    0.000    0.009    0.000 slicing.py:567(insert_many)
+     2001    0.002    0.000    0.011    0.000 slicing.py:156(&lt;genexpr&gt;)
+    12003    0.001    0.000    0.001    0.000 {method &#39;pop&#39; of &#39;list&#39; objects}
+        4    0.000    0.000    0.000    0.000 {method &#39;update&#39; of &#39;dict&#39; objects}
+        1    0.000    0.000   19.228   19.228 slicing.py:60(slice_array)
+        1    0.000    0.000    0.000    0.000 slicing.py:464(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 slicing.py:162(&lt;genexpr&gt;)
+        1    0.000    0.000    0.033    0.033 base.py:314(normalize_array)
+        1    0.000    0.000   18.111   18.111 slicing.py:170(slice_wrap_lists)
+        1    0.000    0.000    0.000    0.000 slicing.py:465(&lt;listcomp&gt;)
+        1    0.000    0.000    5.062    5.062 slicing.py:487(take)
+        1    0.000    0.000    0.033    0.033 base.py:343(tokenize)
+        1    0.000    0.000   19.425   19.425 {built-in method builtins.exec}
+        2    0.000    0.000    0.000    0.000 functoolz.py:217(__call__)
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.sum}
+        2    0.000    0.000    0.000    0.000 abc.py:178(__instancecheck__)
+        1    0.000    0.000    0.000    0.000 core.py:1455(normalize_chunks)
+        2    0.000    0.000    0.000    0.000 dicttoolz.py:19(merge)
+        4    0.000    0.000    0.000    0.000 _weakrefset.py:70(__contains__)
+        2    0.000    0.000    0.000    0.000 dicttoolz.py:11(_get_factory)
+        1    0.000    0.000    0.000    0.000 exceptions.py:15(merge)
+        1    0.000    0.000    0.000    0.000 core.py:794(__init__)
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.all}
+        1    0.000    0.000    0.000    0.000 slicing.py:467(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 {method &#39;view&#39; of &#39;numpy.ndarray&#39; objects}
+        4    0.000    0.000    0.000    0.000 slicing.py:183(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 {method &#39;hexdigest&#39; of &#39;_hashlib.HASH&#39; objects}
+        1    0.000    0.000    0.000    0.000 slicing.py:606(replace_ellipsis)
+        1    0.000    0.000    0.000    0.000 slicing.py:192(&lt;listcomp&gt;)
+        4    0.000    0.000    0.000    0.000 slicing.py:207(&lt;genexpr&gt;)
+        1    0.000    0.000    0.000    0.000 slicing.py:475(&lt;listcomp&gt;)
+        2    0.000    0.000    0.033    0.017 utils.py:502(__call__)
+        2    0.000    0.000    0.000    0.000 slicing.py:125(&lt;genexpr&gt;)
+        2    0.000    0.000    0.000    0.000 core.py:1043(&lt;genexpr&gt;)
+        4    0.000    0.000    0.000    0.000 slicing.py:197(&lt;genexpr&gt;)
+        1    0.000    0.000    0.000    0.000 core.py:826(_get_chunks)
+        2    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        1    0.000    0.000    0.000    0.000 {method &#39;ravel&#39; of &#39;numpy.ndarray&#39; objects}
+        1    0.000    0.000    0.000    0.000 {method &#39;disable&#39; of &#39;_lsprof.Profiler&#39; objects}
+        1    0.000    0.000    0.000    0.000 {method &#39;encode&#39; of &#39;str&#39; objects}
+        1    0.000    0.000    0.000    0.000 slicing.py:613(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 core.py:1452(&lt;lambda&gt;)
+        1    0.000    0.000    0.000    0.000 slicing.py:149(&lt;listcomp&gt;)
+        2    0.000    0.000    0.000    0.000 {method &#39;pop&#39; of &#39;dict&#39; objects}
+        2    0.000    0.000    0.000    0.000 {method &#39;items&#39; of &#39;dict&#39; objects}
+        1    0.000    0.000    0.000    0.000 slicing.py:150(&lt;listcomp&gt;)
+        1    0.000    0.000    0.000    0.000 {method &#39;count&#39; of &#39;tuple&#39; objects}
+
+
+</pre></div></div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Philip Austin.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>00 - Introduction &#8212; E213</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="01 - Introduction to joblib" href="01_joblib.html" />
+    <link rel="prev" title="Parallel Python" href="index.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Home</a>
+        <span class="navbar-text navbar-version pull-left"><b>2019Jan01</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">00 - Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#first-steps">First steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-python">Installing python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-extra-dependencies">Installing extra dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#course-objectives">Course objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motivation-editorial">Motivation (editorial)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#concurrency-vs-parallelism">Concurrency vs.&nbsp;parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#threads-and-processes">Threads and processes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#threads-and-processes-in-python">Threads and processes in Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-global-intepreter-lock">Python global intepreter lock</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#thread-scheduling">Thread scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#note-that-these-three-threads-are-taking-turns-resulting-in-a-computation-that-runs-slightly-slower-because-of-overhead-than-running-on-a-single-thread">Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#releasing-the-gil">Releasing the GIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="01_joblib.html">01 - Introduction to joblib</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_joblib.html#Creating-a-process-or-thread-pool-with-joblib">Creating a process or thread pool with joblib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Running-a-threadsafe-function">Running a threadsafe function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Setup-logging-so-we-can-know-what-process-and-thread-we-are-running">Setup logging so we can know what process and thread we are running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Create-two-functions,-one-to-print-thread-and-process-ids,-and-one-to-run-the-wait_for-loop">Create two functions, one to print thread and process ids, and one to run the wait_for loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Now-repeat-this-holding-the-GIL">Now repeat this holding the GIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Now-repeat-with-processes-instead-of-threads">Now repeat with processes instead of threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_xarray_zarr.html">02: xarray, netcdf and zarr</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#The-current-defacto-standard-in-atmos/ocean-science">The current defacto standard in atmos/ocean science</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Some-challenges-with-netcdf">Some challenges with netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#create-an-xarray">create an xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Download-toy-model-data">Download toy model data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Sort-in-numeric-order">Sort in numeric order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Make-an-xarray">Make an xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Dump-to-a-zarr-file">Dump to a zarr file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_dask_and_zarr.html#zarr">zarr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_dask_and_zarr.html#dask">dask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Example,-write-and-read-zarr-arrays-using-multiple-threads">Example, write and read zarr arrays using multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Create-230-Mbytes-of-fake-data">Create 230 Mbytes of fake data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Copy-to-a-zarr-file-on-disk,-using-multiple-threads">Copy to a zarr file on disk, using multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Add-some-attributes">Add some attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Create-an-array-of-zeros-–-note-that-compression-shrinks-it-from-230-Mbytes-to-321-bytes">Create an array of zeros – note that compression shrinks it from 230 Mbytes to 321 bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#copy-input-to-output-using-chunks">copy input to output using chunks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Create-a-dask-array-from-a-zarr-disk-file">Create a dask array from a zarr disk file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#The-following-calculation-uses-numpy,-so-it-releases-the-GIL">The following calculation uses numpy, so it releases the GIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Note-that-result-hasn’t-been-computed-yet">Note that result hasn’t been computed yet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Now-do-the-calculation">Now do the calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#You-can-evaluate-your-own-functions-on-dask-arrays">You can evaluate your own functions on dask arrays</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="04_numba.html">04 - Using numba to release the GIL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#Timing-python-code">Timing python code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="04_numba.html#Define-a-function-that-does-a-lot-of-computation">Define a function that does a lot of computation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_numba.html#now-time-it-with-pure-python">now time it with pure python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#Now-try-this-with-numba">Now try this with numba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#Make-two-identical-functions:-one-that-releases-and-one-that-holds-the-GIL">Make two identical functions: one that releases and one that holds the GIL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#now-time-wait_loop_withgil">now time wait_loop_withgil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#not-bad,-but-we’re-only-using-one-core">not bad, but we’re only using one core</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_cffi.html#Accessing-the-functions-from-python-using-CFFI">Accessing the functions from python using CFFI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="05_cffi.html#Running-this-in-a-threadpool">Running this in a threadpool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">00 - Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#first-steps">First steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-python">Installing python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-extra-dependencies">Installing extra dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#course-objectives">Course objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motivation-editorial">Motivation (editorial)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#concurrency-vs-parallelism">Concurrency vs.&nbsp;parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#threads-and-processes">Threads and processes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#threads-and-processes-in-python">Threads and processes in Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-global-intepreter-lock">Python global intepreter lock</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#thread-scheduling">Thread scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#note-that-these-three-threads-are-taking-turns-resulting-in-a-computation-that-runs-slightly-slower-because-of-overhead-than-running-on-a-single-thread">Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#releasing-the-gil">Releasing the GIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="01_joblib.html">01 - Introduction to joblib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_xarray_zarr.html">02: xarray, netcdf and zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_numba.html">04 - Using numba to release the GIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="index.html" title="Previous Chapter: Parallel Python"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; Parallel Python</span>
+    </a>
+  </li>
+  <li>
+    <a href="01_joblib.html" title="Next Chapter: 01 - Introduction to joblib"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">01 - Introduc... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/00_intro.rst.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">00 - Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#first-steps">First steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installing-python">Installing python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-extra-dependencies">Installing extra dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#course-objectives">Course objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motivation-editorial">Motivation (editorial)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#concurrency-vs-parallelism">Concurrency vs.&nbsp;parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#threads-and-processes">Threads and processes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#threads-and-processes-in-python">Threads and processes in Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-global-intepreter-lock">Python global intepreter lock</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#thread-scheduling">Thread scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#note-that-these-three-threads-are-taking-turns-resulting-in-a-computation-that-runs-slightly-slower-because-of-overhead-than-running-on-a-single-thread">Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#releasing-the-gil">Releasing the GIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="01_joblib.html">01 - Introduction to joblib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_xarray_zarr.html">02: xarray, netcdf and zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_numba.html">04 - Using numba to release the GIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  <h1><p>Table of Contents</p>
+</h1><div class="toc"><ul class="toc-item"><li><p>1&nbsp;&nbsp;00 - Introduction</p>
+<ul class="toc-item"><li><p>1.1&nbsp;&nbsp;First steps</p>
+<ul class="toc-item"><li><p>1.1.1&nbsp;&nbsp;Installing python</p>
+</li><li><p>1.1.2&nbsp;&nbsp;Installing extra dependencies</p>
+</li></ul></li><li><p>1.2&nbsp;&nbsp;Course objectives</p>
+</li><li><p>1.3&nbsp;&nbsp;Motivation (editorial)</p>
+<ul class="toc-item"><li><p>1.3.1&nbsp;&nbsp;Concurrency vs.&nbsp;parallelism</p>
+</li><li><p>1.3.2&nbsp;&nbsp;Threads and processes</p>
+</li><li><p>1.3.3&nbsp;&nbsp;Thread scheduling</p>
+</li><li><p>1.3.4&nbsp;&nbsp;Releasing the GIL</p>
+</li></ul></li></ul></li></ul></div><div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+</pre></div>
+</div>
+<div class="section" id="introduction">
+<h1>00 - Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="first-steps">
+<h2>First steps<a class="headerlink" href="#first-steps" title="Permalink to this headline">¶</a></h2>
+<p><strong>(Note – this material is under construction and might change
+significantly between now and June 14)</strong></p>
+<div class="section" id="installing-python">
+<h3>Installing python<a class="headerlink" href="#installing-python" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">All the code used in the tutorial can be run on a Windows, Mac, or
+Linux laptop</p>
+</li>
+<li><p class="first">We will use a python distribution called
+<a class="reference external" href="https://www.anaconda.com/distribution/">Anaconda</a> to run a series
+of <a class="reference external" href="http://jupyter.org/">Jupyter notebooks</a> (you are reading a
+jupyter notebook now).</p>
+</li>
+<li><p class="first">You’re definitely encouraged to bring your laptop to the tutorial,
+please do the following:</p>
+<ul>
+<li><p class="first">Download and install Miniconda 3.6 from
+<a class="reference external" href="https://conda.io/miniconda.html">https://conda.io/miniconda.html</a> on your laptop, accepting all the
+defaults for the install (I specified an install into a folder
+named ma36 below):</p>
+</li>
+<li><p class="first">If you are running on Windows:</p>
+<ul>
+<li><p class="first">Press the ⊞ Win key to open a cmd shell and type: anaconda
+prompt</p>
+<p>This should launch a cmd shell that we can use to install other
+packages</p>
+<p>To test your installation, type</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="nb">list</span>
+</pre></div>
+</div>
+<p>at the prompt, which should show you a list of installed
+packages starting with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">base</span><span class="p">)</span> <span class="n">C</span><span class="p">:</span>\<span class="n">Users</span>\<span class="n">paust</span><span class="o">&gt;</span><span class="n">conda</span> <span class="nb">list</span>
+<span class="c1"># packages in environment at C:\Users\paust\ma36:</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you are running MacOS or Linux, after the install launch a
+bash terminal. Hopefully when you type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="nb">list</span>
+</pre></div>
+</div>
+<p>you will see output that looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">conda</span> <span class="nb">list</span>
+<span class="c1"># packages in environment at /Users/phil/mb36:</span>
+<span class="c1">#</span>
+<span class="c1"># Name                    Version                   Build  Channel</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="installing-extra-dependencies">
+<h3>Installing extra dependencies<a class="headerlink" href="#installing-extra-dependencies" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p class="first">To install the software required to run the notebooks:</p>
+<ol class="arabic">
+<li><p class="first">Download
+<a class="reference external" href="https://raw.githubusercontent.com/phaustin/parallel_python_course/master/conda_packages.txt">conda_packages.txt</a>
+by right-clicking on the link.</p>
+</li>
+<li><p class="first">From you cmd or bash terminal, cd to the folder containing that
+file and do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">--</span><span class="n">file</span> <span class="n">conda_packages</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If this succeeds, then typing the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;import numpy;print(numpy.__version__)&#39;</span>
+</pre></div>
+</div>
+<p>should print:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.14</span><span class="o">.</span><span class="mi">2</span>
+</pre></div>
+</div>
+<p>(or possibly a higher version)</p>
+</li>
+<li><p class="first">If you have trouble with these steps, send me a bug report at
+<a class="reference external" href="mailto:paustin&#37;&#52;&#48;eos&#46;ubc&#46;ca">paustin<span>&#64;</span>eos<span>&#46;</span>ubc<span>&#46;</span>ca</a> and we can iterate.</p>
+</li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="course-objectives">
+<h2>Course objectives<a class="headerlink" href="#course-objectives" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>The objective is to learn how to write shared-memory Python programs
+that make use of multiple cores on a single node. The tutorial will
+introduce several python modules that schedule operations and manage
+data to simplify multiprocessing with Python.</li>
+</ul>
+<ol class="arabic simple">
+<li>Benchmarking parallel code</li>
+<li>Understanding the global interpreter lock (GIL)</li>
+<li>Multiprocessing and multithreading with
+<a class="reference external" href="https://pythonhosted.org/joblib/">joblib</a></li>
+<li>Checkpointing/restarting multiprocessor jobs</li>
+<li>Multithreaded file i/o with
+<a class="reference external" href="http://zarr.readthedocs.io/en/latest/">zarr</a> and
+<a class="reference external" href="https://arrow.apache.org/docs/python/parquet.html">parquet</a></li>
+<li>Writing extensions that release the GIL:<ol class="arabic">
+<li>Using <a class="reference external" href="http://numba.pydata.org/">numba</a></li>
+<li>Using C++ with cffi</li>
+</ol>
+</li>
+<li>Using
+<a class="reference external" href="http://dask.pydata.org/en/latest/">dask</a>/<a class="reference external" href="http://xarray.pydata.org/en/stable/dask.html">xarray</a>
+to analyze out-of-core datasets</li>
+<li>Visualizing parallelization with dask</li>
+<li>Setting up a conda-forge environment for parallel computing</li>
+</ol>
+</div>
+<div class="section" id="motivation-editorial">
+<h2>Motivation (editorial)<a class="headerlink" href="#motivation-editorial" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>I learned this material by <a class="reference external" href="https://en.wikipedia.org/wiki/Cargo_cult_programming">cargo
+culting</a>,
+but my hope is that this set of working examples can shorten the
+learning curve for newcomers trying to combine Python with C++/C/
+Fortran. Multiprocessing, multithreading and cross language
+programming are all in a state of rapid development; these constant
+changes make it impossible to google a definitive answer about any of
+these topics.</li>
+<li>I’m presenting my personal opinion about the best way to organize
+mixed language computer programs so that they:<ol class="arabic">
+<li>Give the same answers each time they are built and run</li>
+<li>Can be easily shared with colleagues, including yourself six
+months in the future.</li>
+<li>Save time (your time + collaborators’ time + machine time).</li>
+</ol>
+</li>
+<li>I’ll maintain this repository, and test it on Linux, OSX and Windows.
+If you hit bugs, I welcome github issues and pull requests, or an
+emailed questions/examples of problems.</li>
+<li>This is an area of Python programming that is changing/developing on
+an almost weekly basis. There’s reason to believe that things
+(meaning the way that we build and deploy multi-language
+applications) will stabilize over the next year or so.</li>
+</ol>
+<div class="section" id="concurrency-vs-parallelism">
+<h3>Concurrency vs.&nbsp;parallelism<a class="headerlink" href="#concurrency-vs-parallelism" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://www.google.ca/search?q=concurrency+vs.+parallelism&amp;rlz=1C5CHFA_enCA698CA698&amp;oq=conncurrency+vs.+parallel&amp;aqs=chrome.1.69i57j0l5.6167j0j7&amp;sourceid=chrome&amp;ie=UTF-8">Google
+says:</a></p>
+</div>
+<div class="section" id="threads-and-processes">
+<h3>Threads and processes<a class="headerlink" href="#threads-and-processes" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>From
+<a class="reference external" href="https://en.wikipedia.org/wiki/Thread_(computing)">Wikipedia</a>:</div></blockquote>
+<blockquote>
+<div>“In computer science, a thread of execution is the smallest
+sequence of programmed instructions that can be managed
+independently by a scheduler, which is typically a part of the
+operating system.[1] The implementation of threads and processes
+differs between operating systems, but in most cases a thread is a
+component of a process. Multiple threads can exist within one
+process, executing concurrently and sharing resources such as
+memory, while different processes do not share these resources. In
+particular, the threads of a process share its executable code and
+the values of its variables at any given time.”</div></blockquote>
+<div class="section" id="threads-and-processes-in-python">
+<h4>Threads and processes in Python<a class="headerlink" href="#threads-and-processes-in-python" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://tommoral.github.io/pyparis17/#1">Reference: Thomas Moreau and Olivier Griesel, PyParis 2017
+[Mor2017]</a></p>
+</div>
+<div class="section" id="python-global-intepreter-lock">
+<h4>Python global intepreter lock<a class="headerlink" href="#python-global-intepreter-lock" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>Motivation: python objects (lists, dicts, sets, etc.) manage their
+own memory by storing a counter that keeps track of how many copies
+of an object are in use. Memory is reclaimed when that counter goes
+to zero.</li>
+<li>Having a globally available reference count makes it simple for
+Python extensions to create, modify and share python objects.</li>
+<li>To avoid memory corruption, a python process will only allow 1 thread
+at any given moment to run python code. Any thread that wants to
+access python objects in that process needs to acquire the global
+interpreter lock (GIL).</li>
+<li>A python extension written in C, C++ or numba is free to release the
+GIL, provided it doesn’t create, destroy or modify any python
+objects. For example: numpy, pandas, scipy.ndimage,
+scipy.integrate.quadrature all release the GIL</li>
+<li>Many python standard library input/output routines (file reading,
+networking) also release the GIL</li>
+<li>On the other hand: hdf5, and therefore h5py and netCDF4, don’t
+release the GIL and are single threaded.</li>
+<li>Python comes with many libraries to manage both processes and
+threads.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="thread-scheduling">
+<h3>Thread scheduling<a class="headerlink" href="#thread-scheduling" title="Permalink to this headline">¶</a></h3>
+<p>If multiple threads are present in a python process, the python
+intepreter releases the GIL at specified intervals (5 miliseconds
+default) to allow them to execute:</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/morreau1.png&#39;</span><span class="p">)</span>  <span class="c1">#[Mor2017]</span>
+</pre></div>
+</div>
+<img alt="_images/00_intro_10_0.png" src="_images/00_intro_10_0.png" />
+<div class="section" id="note-that-these-three-threads-are-taking-turns-resulting-in-a-computation-that-runs-slightly-slower-because-of-overhead-than-running-on-a-single-thread">
+<h4>Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread<a class="headerlink" href="#note-that-these-three-threads-are-taking-turns-resulting-in-a-computation-that-runs-slightly-slower-because-of-overhead-than-running-on-a-single-thread" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="releasing-the-gil">
+<h3>Releasing the GIL<a class="headerlink" href="#releasing-the-gil" title="Permalink to this headline">¶</a></h3>
+<p>If the computation running on the thread has released the GIL, then it
+can run independently of other threads in the process. Execution of
+these threads are scheduled by the operating system along with all the
+other threads and processes on the system.</p>
+<p>In particular, basic computation functions in Numpy, like (_*add_*
+(+), _<em>subtract_</em> (-) etc. release the GIL, as well as universal
+math functions like cos, sin etc.</p>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/morreau2.png&#39;</span><span class="p">)</span>  <span class="c1">#[Morr2017]</span>
+</pre></div>
+</div>
+<img alt="_images/00_intro_13_0.png" src="_images/00_intro_13_0.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/morreau3.png&#39;</span><span class="p">)</span> <span class="c1">#[Morr2017]</span>
+</pre></div>
+</div>
+<img alt="_images/00_intro_14_0.png" src="_images/00_intro_14_0.png" />
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Philip Austin.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

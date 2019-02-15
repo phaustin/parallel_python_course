@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>05 - Using conda to manage C++ libraries &#8212; E213</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="06 - Using conda to manage C++ libraries with pybind11" href="06_pybind11.html" />
+    <link rel="prev" title="04 - Using numba to release the GIL" href="04_numba.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">
+          Home</a>
+        <span class="navbar-text navbar-version pull-left"><b>2019Jan01</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">00 - Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="00_intro.html#first-steps">First steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="00_intro.html#installing-python">Installing python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="00_intro.html#installing-extra-dependencies">Installing extra dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="00_intro.html#course-objectives">Course objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="00_intro.html#motivation-editorial">Motivation (editorial)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="00_intro.html#concurrency-vs-parallelism">Concurrency vs.&nbsp;parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="00_intro.html#threads-and-processes">Threads and processes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="00_intro.html#threads-and-processes-in-python">Threads and processes in Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="00_intro.html#python-global-intepreter-lock">Python global intepreter lock</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="00_intro.html#thread-scheduling">Thread scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="00_intro.html#note-that-these-three-threads-are-taking-turns-resulting-in-a-computation-that-runs-slightly-slower-because-of-overhead-than-running-on-a-single-thread">Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="00_intro.html#releasing-the-gil">Releasing the GIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="01_joblib.html">01 - Introduction to joblib</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_joblib.html#Creating-a-process-or-thread-pool-with-joblib">Creating a process or thread pool with joblib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Running-a-threadsafe-function">Running a threadsafe function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Setup-logging-so-we-can-know-what-process-and-thread-we-are-running">Setup logging so we can know what process and thread we are running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Create-two-functions,-one-to-print-thread-and-process-ids,-and-one-to-run-the-wait_for-loop">Create two functions, one to print thread and process ids, and one to run the wait_for loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Now-repeat-this-holding-the-GIL">Now repeat this holding the GIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Now-repeat-with-processes-instead-of-threads">Now repeat with processes instead of threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_joblib.html#Summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="02_xarray_zarr.html">02: xarray, netcdf and zarr</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#The-current-defacto-standard-in-atmos/ocean-science">The current defacto standard in atmos/ocean science</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Some-challenges-with-netcdf">Some challenges with netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#create-an-xarray">create an xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Download-toy-model-data">Download toy model data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Sort-in-numeric-order">Sort in numeric order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Make-an-xarray">Make an xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_xarray_zarr.html#Dump-to-a-zarr-file">Dump to a zarr file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_dask_and_zarr.html#zarr">zarr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_dask_and_zarr.html#dask">dask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Example,-write-and-read-zarr-arrays-using-multiple-threads">Example, write and read zarr arrays using multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Create-230-Mbytes-of-fake-data">Create 230 Mbytes of fake data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Copy-to-a-zarr-file-on-disk,-using-multiple-threads">Copy to a zarr file on disk, using multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Add-some-attributes">Add some attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Create-an-array-of-zeros-–-note-that-compression-shrinks-it-from-230-Mbytes-to-321-bytes">Create an array of zeros – note that compression shrinks it from 230 Mbytes to 321 bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#copy-input-to-output-using-chunks">copy input to output using chunks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Create-a-dask-array-from-a-zarr-disk-file">Create a dask array from a zarr disk file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#The-following-calculation-uses-numpy,-so-it-releases-the-GIL">The following calculation uses numpy, so it releases the GIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Note-that-result-hasn’t-been-computed-yet">Note that result hasn’t been computed yet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#Now-do-the-calculation">Now do the calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_dask_and_zarr.html#You-can-evaluate-your-own-functions-on-dask-arrays">You can evaluate your own functions on dask arrays</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="04_numba.html">04 - Using numba to release the GIL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#Timing-python-code">Timing python code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="04_numba.html#Define-a-function-that-does-a-lot-of-computation">Define a function that does a lot of computation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_numba.html#now-time-it-with-pure-python">now time it with pure python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#Now-try-this-with-numba">Now try this with numba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#Make-two-identical-functions:-one-that-releases-and-one-that-holds-the-GIL">Make two identical functions: one that releases and one that holds the GIL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#now-time-wait_loop_withgil">now time wait_loop_withgil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_numba.html#not-bad,-but-we’re-only-using-one-core">not bad, but we’re only using one core</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Accessing-the-functions-from-python-using-CFFI">Accessing the functions from python using CFFI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Running-this-in-a-threadpool">Running this in a threadpool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">00 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_joblib.html">01 - Introduction to joblib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_xarray_zarr.html">02: xarray, netcdf and zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_numba.html">04 - Using numba to release the GIL</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Accessing-the-functions-from-python-using-CFFI">Accessing the functions from python using CFFI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Running-this-in-a-threadpool">Running this in a threadpool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+  <li>
+    <a href="04_numba.html" title="Previous Chapter: 04 - Using numba to release the GIL"><span class="glyphicon glyphicon-chevron-left visible-sm"></span><span class="hidden-sm hidden-tablet">&laquo; 04 - Using nu...</span>
+    </a>
+  </li>
+  <li>
+    <a href="06_pybind11.html" title="Next Chapter: 06 - Using conda to manage C++ libraries with pybind11"><span class="glyphicon glyphicon-chevron-right visible-sm"></span><span class="hidden-sm hidden-tablet">06 - Using co... &raquo;</span>
+    </a>
+  </li>
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="_sources/05_cffi.ipynb.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="00_intro.html">00 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="01_joblib.html">01 - Introduction to joblib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_xarray_zarr.html">02: xarray, netcdf and zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="04_numba.html">04 - Using numba to release the GIL</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Accessing-the-functions-from-python-using-CFFI">Accessing the functions from python using CFFI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Running-this-in-a-threadpool">Running this in a threadpool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 7ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<h1><p>Table of Contents</p>
+</h1><div class="toc"><ul class="toc-item"><li><p>1&nbsp;&nbsp;05 - Using conda to manage C++ libraries</p>
+</li><li><p>2&nbsp;&nbsp;Using conda to manage python libraries</p>
+<ul class="toc-item"><li><p>2.1&nbsp;&nbsp;Accessing the functions from python using CFFI</p>
+<ul class="toc-item"><li><p>2.1.1&nbsp;&nbsp;Running this in a threadpool</p>
+</li></ul></li></ul></li></ul></div><div class="section" id="05---Using-conda-to-manage-C++-libraries">
+<h1>05 - Using conda to manage C++ libraries<a class="headerlink" href="#05---Using-conda-to-manage-C++-libraries" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="https://github.com/phaustin/parallel_python_course/tree/master/code_examples/cffi_funs">cffi_funs</a> folder shows how to set up a C++ file so that it compiled with <a class="reference external" href="http://preshing.com/20170511/how-to-build-a-cmake-based-project/">cmake</a> and also <a class="reference external" href="http://preshing.com/20170522/learn-cmakes-scripting-language-in-15-minutes/">here</a></p>
+<p>The folder contains <a class="reference external" href="https://github.com/phaustin/parallel_python_course/blob/master/code_examples/cffi_funs/Readme_cffi_funs.rst">these files</a></p>
+<p><strong>Demo</strong></p>
+<p>Show how to build a conda archive with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">build</span> <span class="o">.</span>
+</pre></div>
+</div>
+<p>and then upload it to your <a class="reference external" href="https://anaconda.org/phaustin/dashboard">Anaconda channel</a></p>
+<p>Where it can be installed into a conda environment with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">phaustin</span> <span class="n">cffi_funs</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Using-conda-to-manage-python-libraries">
+<h1>Using conda to manage python libraries<a class="headerlink" href="#Using-conda-to-manage-python-libraries" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference external" href="https://github.com/phaustin/parallel_python_course/tree/master/code_examples/cffi_practice">cffi_practice</a> folder shows how to install a simple python project using conda and <a class="reference external" href="http://setuptools.readthedocs.io/en/latest/setuptools.html">setuptools</a></p>
+<p><strong>Demo</strong></p>
+<p>Show how to build and upload cffi_practice to my conda channel</p>
+<p>The purpose of this module is to provide one function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cffi_practice</span><span class="o">.</span><span class="n">get_paths</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>That can be used to locate the library and header from cff_funs</p>
+<p>The get_paths function is defined in this package in the <a class="reference external" href="https://github.com/phaustin/parallel_python_course/blob/master/code_examples/cffi_practice/cffi_practice/__init__.py">init.py</a> module.</p>
+<p>Try:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="n">cff_practice</span> <span class="o">-</span><span class="n">c</span> <span class="n">phaustin</span>
+</pre></div>
+</div>
+<p>Then:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;import cffi_practice;print(cffi_practice.get_paths())&#39;</span>
+</pre></div>
+</div>
+<p>Which should output something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;libfile&#39;</span><span class="p">:</span> <span class="s1">&#39;/Users/phil/mini36/lib/libcffi_funs.so&#39;</span><span class="p">,</span> <span class="s1">&#39;libdir&#39;</span><span class="p">:</span> <span class="s1">&#39;/Users/phil/mini36/lib&#39;</span><span class="p">,</span> <span class="s1">&#39;includedir&#39;</span><span class="p">:</span> <span class="s1">&#39;/Users/phil/mini36/include&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="section" id="Accessing-the-functions-from-python-using-CFFI">
+<h2>Accessing the functions from python using CFFI<a class="headerlink" href="#Accessing-the-functions-from-python-using-CFFI" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://cffi.readthedocs.io/en/latest/overview.html">C foreign function interface</a> provides a way to call the cffi_funs from python</p>
+<p>Here is an example that exposes the get_thread_id and get_proces_id functions from the cffi_fun package</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">cffi</span> <span class="kn">import</span> <span class="n">FFI</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span>
+<span class="kn">from</span> <span class="nn">cffi_practice</span> <span class="kn">import</span> <span class="n">get_paths</span>
+<span class="c1">#</span>
+<span class="c1">#  locate the library</span>
+<span class="c1">#</span>
+<span class="n">lib_so_file</span><span class="o">=</span><span class="n">get_paths</span><span class="p">()[</span><span class="s1">&#39;libfile&#39;</span><span class="p">]</span>
+<span class="n">ffi</span><span class="o">=</span><span class="n">FFI</span><span class="p">()</span>
+<span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    void get_thread_id(char *thread_id);</span>
+<span class="s2">    void get_process_id(char *process_id);</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="c1">#  open the library file</span>
+<span class="c1">#</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="n">lib_so_file</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;found these functions in module: &#39;</span><span class="p">,</span><span class="nb">dir</span><span class="p">(</span><span class="n">lib</span><span class="p">))</span>
+<span class="c1">#</span>
+<span class="c1"># create a 25 character C array to hold the ouput</span>
+<span class="c1">#</span>
+<span class="n">arg_thread</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>  <span class="c1">#(C++)</span>
+<span class="c1">#</span>
+<span class="c1"># copy the bytes into arg_thread  (C++)</span>
+<span class="c1">#</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">get_thread_id</span><span class="p">(</span><span class="n">arg_thread</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="c1"># get the bytes into a python byte object</span>
+<span class="c1">#</span>
+<span class="n">out_thread</span><span class="o">=</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">arg_thread</span><span class="p">)</span>  <span class="c1">#C++ to python</span>
+<span class="c1">#</span>
+<span class="c1"># turn the bytes into a utf-8 string</span>
+<span class="c1">#</span>
+<span class="n">str_out</span><span class="o">=</span><span class="n">out_thread</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>  <span class="c1">#python</span>
+<span class="c1">#</span>
+<span class="c1"># print it out</span>
+<span class="c1">#</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;Here is the thread id in hex: -{str_out}-&quot;</span><span class="p">)</span>
+<span class="c1">#</span>
+<span class="c1"># repeat for the process</span>
+<span class="c1">#</span>
+<span class="n">arg_process</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">get_process_id</span><span class="p">(</span><span class="n">arg_process</span><span class="p">)</span>
+<span class="n">out_process</span><span class="o">=</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">arg_process</span><span class="p">)</span>
+<span class="n">str_out</span><span class="o">=</span><span class="n">out_process</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;here is the process ide in base 10: -{str_out}-&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+found these functions in module:  [&#39;get_process_id&#39;, &#39;get_thread_id&#39;]
+Here is the thread id in hex: -4fdf76a5-
+here is the process ide in base 10: -16502-
+</pre></div></div>
+</div>
+<div class="section" id="Running-this-in-a-threadpool">
+<h3>Running this in a threadpool<a class="headerlink" href="#Running-this-in-a-threadpool" title="Permalink to this headline">¶</a></h3>
+<p>The following script uses joblib to create 10 jobs to call the cffi functions in parallel, returning the pointers to the character array and convertingthem to python strings.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">nprocs</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">arg_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">fun_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">dict_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nprocs</span><span class="p">):</span>
+    <span class="n">fun_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">get_thread_id</span><span class="p">)</span>
+    <span class="n">result_var</span><span class="o">=</span><span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+    <span class="n">arg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result_var</span><span class="p">)</span>
+    <span class="n">dict_list</span><span class="o">.</span><span class="n">append</span><span class="p">({})</span>
+<span class="n">ptr_list</span><span class="o">=</span><span class="p">[[</span><span class="n">ffi</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;char*&quot;</span><span class="p">,</span><span class="n">item</span><span class="p">)]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arg_list</span><span class="p">]</span>
+<span class="n">jobs</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fun_list</span><span class="p">,</span><span class="n">ptr_list</span><span class="p">,</span><span class="n">dict_list</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;here are the pointers to hold the ids: {ptr_list}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">nprocs</span><span class="p">,</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;threading&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">parallel</span><span class="p">:</span>
+    <span class="n">parallel</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;here are the thread ids&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ptr_list</span><span class="p">:</span>
+    <span class="n">out_thread</span><span class="o">=</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;thread id: &#39;</span><span class="p">,</span><span class="n">out_thread</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+here are the pointers to hold the ids: [[&lt;cdata &#39;char *&#39; 0x7faa09f64970&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09f01f20&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09f2fb90&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09fbd840&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09f7aee0&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09f08c40&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09f08c90&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09f7b6a0&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09f7b6f0&gt;], [&lt;cdata &#39;char *&#39; 0x7faa09f0ef90&gt;]]
+
+here are the thread ids
+thread id:  1bb9329b
+thread id:  72b7e656
+thread id:  7f162e70
+thread id:  c9742b94
+thread id:  9e63eefb
+thread id:  6b8afbdc
+thread id:  c3945c37
+thread id:  425f89f8
+thread id:  e612e1c6
+thread id:  f9e7dfdc
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Philip Austin.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

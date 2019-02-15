@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Course objectives &#8212; E213</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+<meta charset='utf-8'>
+<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+  </head><body>
+
+  <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../index.html">
+          Home</a>
+        <span class="navbar-text navbar-version pull-left"><b>2019Jan01</b></span>
+      </div>
+
+        <div class="collapse navbar-collapse nav-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+              <li class="dropdown globaltoc-container">
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="../index.html">Site <b class="caret"></b></a>
+  <ul class="dropdown-menu globaltoc"
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro.html">00 - Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../00_intro.html#first-steps">First steps</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#installing-python">Installing python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#installing-extra-dependencies">Installing extra dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../00_intro.html#course-objectives">Course objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_intro.html#motivation-editorial">Motivation (editorial)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#concurrency-vs-parallelism">Concurrency vs.&nbsp;parallelism</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#threads-and-processes">Threads and processes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../00_intro.html#threads-and-processes-in-python">Threads and processes in Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../00_intro.html#python-global-intepreter-lock">Python global intepreter lock</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#thread-scheduling">Thread scheduling</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../00_intro.html#note-that-these-three-threads-are-taking-turns-resulting-in-a-computation-that-runs-slightly-slower-because-of-overhead-than-running-on-a-single-thread">Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../00_intro.html#releasing-the-gil">Releasing the GIL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../01_joblib.html">01 - Introduction to joblib</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01_joblib.html#Creating-a-process-or-thread-pool-with-joblib">Creating a process or thread pool with joblib</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Running-a-threadsafe-function">Running a threadsafe function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Setup-logging-so-we-can-know-what-process-and-thread-we-are-running">Setup logging so we can know what process and thread we are running</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Create-two-functions,-one-to-print-thread-and-process-ids,-and-one-to-run-the-wait_for-loop">Create two functions, one to print thread and process ids, and one to run the wait_for loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Now-repeat-this-holding-the-GIL">Now repeat this holding the GIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Now-repeat-with-processes-instead-of-threads">Now repeat with processes instead of threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01_joblib.html#Summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../02_xarray_zarr.html">02: xarray, netcdf and zarr</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#The-current-defacto-standard-in-atmos/ocean-science">The current defacto standard in atmos/ocean science</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Some-challenges-with-netcdf">Some challenges with netcdf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#create-an-xarray">create an xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Download-toy-model-data">Download toy model data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Sort-in-numeric-order">Sort in numeric order</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Make-an-xarray">Make an xarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../02_xarray_zarr.html#Dump-to-a-zarr-file">Dump to a zarr file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../03_dask_and_zarr.html#zarr">zarr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03_dask_and_zarr.html#dask">dask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Example,-write-and-read-zarr-arrays-using-multiple-threads">Example, write and read zarr arrays using multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Create-230-Mbytes-of-fake-data">Create 230 Mbytes of fake data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Copy-to-a-zarr-file-on-disk,-using-multiple-threads">Copy to a zarr file on disk, using multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Add-some-attributes">Add some attributes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Create-an-array-of-zeros-–-note-that-compression-shrinks-it-from-230-Mbytes-to-321-bytes">Create an array of zeros – note that compression shrinks it from 230 Mbytes to 321 bytes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#copy-input-to-output-using-chunks">copy input to output using chunks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Create-a-dask-array-from-a-zarr-disk-file">Create a dask array from a zarr disk file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#The-following-calculation-uses-numpy,-so-it-releases-the-GIL">The following calculation uses numpy, so it releases the GIL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Note-that-result-hasn’t-been-computed-yet">Note that result hasn’t been computed yet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#Now-do-the-calculation">Now do the calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../03_dask_and_zarr.html#You-can-evaluate-your-own-functions-on-dask-arrays">You can evaluate your own functions on dask arrays</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../04_numba.html">04 - Using numba to release the GIL</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#Timing-python-code">Timing python code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../04_numba.html#Define-a-function-that-does-a-lot-of-computation">Define a function that does a lot of computation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../04_numba.html#now-time-it-with-pure-python">now time it with pure python</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#Now-try-this-with-numba">Now try this with numba</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#Make-two-identical-functions:-one-that-releases-and-one-that-holds-the-GIL">Make two identical functions: one that releases and one that holds the GIL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#now-time-wait_loop_withgil">now time wait_loop_withgil</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_numba.html#not-bad,-but-we’re-only-using-one-core">not bad, but we’re only using one core</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05_cffi.html#Accessing-the-functions-from-python-using-CFFI">Accessing the functions from python using CFFI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../05_cffi.html#Running-this-in-a-threadpool">Running this in a threadpool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+</ul>
+</li>
+              
+                <li class="dropdown">
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro.html">00 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_joblib.html">01 - Introduction to joblib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_xarray_zarr.html">02: xarray, netcdf and zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_numba.html">04 - Using numba to release the GIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+</ul>
+</li>
+              
+            
+            
+              
+                
+              
+            
+            
+            
+            
+              <li class="hidden-sm">
+<div id="sourcelink">
+  <a href="../_sources/hold/intro.ipynb.txt"
+     rel="nofollow">Source</a>
+</div></li>
+            
+          </ul>
+
+          
+            
+<form class="navbar-form navbar-right" action="../search.html" method="get">
+ <div class="form-group">
+  <input type="text" name="q" class="form-control" placeholder="Search" />
+ </div>
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+          
+        </div>
+    </div>
+  </div>
+
+<div class="container">
+  <div class="row">
+      <div class="col-md-3">
+        <div id="sidebar" class="bs-sidenav" role="complementary"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../00_intro.html">00 - Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../01_joblib.html">01 - Introduction to joblib</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_xarray_zarr.html">02: xarray, netcdf and zarr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_dask_and_zarr.html">03 - Using dask and zarr for multithreaded input/output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../04_numba.html">04 - Using numba to release the GIL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html">05 - Using conda to manage C++ libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_cffi.html#Using-conda-to-manage-python-libraries">Using conda to manage python libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_pybind11.html">06 - Using conda to manage C++ libraries with pybind11</a></li>
+</ul>
+
+        </div>
+      </div>
+    <div class="col-md-9 content">
+      
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 7ex;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    background: #f5f5f5;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">contexttimer</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">jit</span>
+<span class="kn">import</span> <span class="nn">multiprocessing</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="kn">import</span> <span class="n">Parallel</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Course-objectives">
+<h1>Course objectives<a class="headerlink" href="#Course-objectives" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li>The objective is to learn how to write shared-memory Python programs that make use of multiple cores on a single node. The tutorial will introduce several python modules that schedule operations and manage data to simplify multiprocessing with Python.</li>
+</ul>
+<ol class="arabic simple">
+<li>Benchmarking parallel code</li>
+<li>Understanding the global interpreter lock (GIL)</li>
+<li>Multiprocessing and multithreading with <a class="reference external" href="https://pythonhosted.org/joblib/">joblib</a></li>
+<li>Checkpointing/restarting multiprocessor jobs</li>
+<li>Multithreaded file i/o with <a class="reference external" href="http://zarr.readthedocs.io/en/latest/">zarr</a> and <a class="reference external" href="https://arrow.apache.org/docs/python/parquet.html">parquet</a></li>
+<li>Writing extensions that release the GIL:<ol class="arabic">
+<li>Using <a class="reference external" href="http://numba.pydata.org/">numba</a></li>
+<li>Using <a class="reference external" href="http://cython.org/">cython</a></li>
+<li>Using C++ and <a class="reference external" href="http://pybind11.readthedocs.io/en/stable/?badge=stable">pybind11</a> with <a class="reference external" href="https://xtensor-python.readthedocs.io/en/latest/">xtensor-python</a></li>
+</ol>
+</li>
+<li>Using <a class="reference external" href="http://dask.pydata.org/en/latest/">dask</a>/<a class="reference external" href="http://xarray.pydata.org/en/stable/dask.html">xarray</a> to analyze out-of-core datasets</li>
+<li>Visualizing parallelization with dask</li>
+<li>Setting up a conda-forge environment for parallel computing</li>
+</ol>
+<div class="section" id="Motivation-–-the-prince-of-memory-and-processors-continues-to-decrease">
+<h2>Motivation – the prince of memory and processors continues to decrease<a class="headerlink" href="#Motivation-–-the-prince-of-memory-and-processors-continues-to-decrease" title="Permalink to this headline">¶</a></h2>
+<p>Commodity data processor: <a class="reference external" href="http://www.titancomputers.com/Titan-X179-Intel-Xeon-E5-V4-Broadwell-EP-Ultra-p/x179.htm">8 cores/16 threads with 16 Gbytes of RAM for $US 2000</a></p>
+<div class="section" id="How-do-we-get-the-most-from-these-cores?">
+<h3>How do we get the most from these cores?<a class="headerlink" href="#How-do-we-get-the-most-from-these-cores?" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="Threads-and-processes">
+<h3>Threads and processes<a class="headerlink" href="#Threads-and-processes" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div>From <a class="reference external" href="https://en.wikipedia.org/wiki/Thread_(computing)">Wikipedia</a>:</div></blockquote>
+<blockquote>
+<div>“In computer science, a thread of execution is the smallest sequence of programmed instructions that can be managed independently by a scheduler, which is typically a part of the operating system.[1] The implementation of threads and processes differs between operating systems, but in most cases a thread is a component of a process. Multiple threads can exist within one process, executing concurrently and sharing resources such as memory, while different processes do not share these
+resources. In particular, the threads of a process share its executable code and the values of its variables at any given time.”</div></blockquote>
+<div class="section" id="Threads-and-processes-in-Python">
+<h4>Threads and processes in Python<a class="headerlink" href="#Threads-and-processes-in-Python" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="https://tommoral.github.io/pyparis17/#1">Reference: Thomas Moreau and Olivier Griesel, PyParis 2017 [Mor2017]</a></p>
+</div>
+<div class="section" id="Python-global-intepreter-lock">
+<h4>Python global intepreter lock<a class="headerlink" href="#Python-global-intepreter-lock" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li>Motivation: python objects (lists, dicts, sets, etc.) manage their own memory by storing a counter that keeps track of how many copies of an object are in use. Memory is reclaimed when that counter goes to zero.</li>
+<li>Having a globally available reference count makes it simple for Python extensions to create, modify and share python objects.</li>
+<li>To avoid memory corruption, a python process will only allow 1 thread at any given moment to run python code. Any thread that wants to access python objects in that process needs to acquire the global interpreter lock (GIL).</li>
+<li>A python extension written in C, C++ or numba is free to release the GIL, provided it doesn’t create, destroy or modify any python objects. For example: numpy, pandas, scipy.ndimage, scipy.integrate.quadrature all release the GIL</li>
+<li>Many python standard library input/output routines (file reading, networking) also release the GIL</li>
+<li>On the other hand: hdf5, and therefore h5py and netCDF4, don’t release the GIL and are single threaded.</li>
+<li>Python comes with many libraries to manage both processes and threads.</li>
+</ol>
+</div>
+</div>
+<div class="section" id="Thread-scheduling">
+<h3>Thread scheduling<a class="headerlink" href="#Thread-scheduling" title="Permalink to this headline">¶</a></h3>
+<p>If multiple threads are present in a python process, the python intepreter releases the GIL at specified intervals (5 miliseconds default) to allow them to execute:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/morreau1.png&#39;</span><span class="p">)</span>  <span class="c1">#[Mor2017]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/hold_intro_6_0.png" src="../_images/hold_intro_6_0.png" />
+</div>
+</div>
+<div class="section" id="Note-that-these-three-threads-are-taking-turns,-resulting-in-a-computation-that-runs-slightly-slower-(because-of-overhead)-than-running-on-a-single-thread">
+<h4>Note that these three threads are taking turns, resulting in a computation that runs slightly slower (because of overhead) than running on a single thread<a class="headerlink" href="#Note-that-these-three-threads-are-taking-turns,-resulting-in-a-computation-that-runs-slightly-slower-(because-of-overhead)-than-running-on-a-single-thread" title="Permalink to this headline">¶</a></h4>
+</div>
+</div>
+<div class="section" id="Releasing-the-GIL">
+<h3>Releasing the GIL<a class="headerlink" href="#Releasing-the-GIL" title="Permalink to this headline">¶</a></h3>
+<p>If the computation running on the thread has released the GIL, then it can run independently of other threads in the process. Execution of these threads are scheduled by the operating system along with all the other threads and processes on the system.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/morreau2.png&#39;</span><span class="p">)</span>  <span class="c1">#[Morr2017]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/hold_intro_9_0.png" src="../_images/hold_intro_9_0.png" />
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;images/morreau3.png&#39;</span><span class="p">)</span> <span class="c1">#[Morr2017]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/hold_intro_10_0.png" src="../_images/hold_intro_10_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Timing-python-code">
+<h3>Timing python code<a class="headerlink" href="#Timing-python-code" title="Permalink to this headline">¶</a></h3>
+<p>One easy way to tell whether you are utilizing multiple cores is to track the wall clock time measured by <a class="reference external" href="https://docs.python.org/3/library/time.html#time.perf_counter">time.perf_counter</a> against the total cpu time used by all threads meausred with <a class="reference external" href="https://docs.python.org/3/library/time.html#time.process_time">time.process_time</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">wait_loop</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function under test.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+                    <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span>
+                    <span class="n">out</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">**</span><span class="mf">2.</span>
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">nloops</span><span class="o">=</span><span class="mi">200</span>
+<span class="k">with</span> <span class="n">contexttimer</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">)</span> <span class="k">as</span> <span class="n">pure_wall</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">contexttimer</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">)</span> <span class="k">as</span> <span class="n">pure_cpu</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">=</span><span class="n">wait_loop</span><span class="p">(</span><span class="n">nloops</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;pure python wall time {pure_wall.elapsed} and cpu time {pure_cpu.elapsed}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+pure python wall time 14.820747477933764 and cpu time 14.542945
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nd">@jit</span><span class="p">(</span><span class="s1">&#39;float64(int64)&#39;</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">nogil</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">wait_loop_nogil</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function under test.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+                    <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span>
+                    <span class="n">out</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">**</span><span class="mf">2.</span>
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nd">@jit</span><span class="p">(</span><span class="s1">&#39;float64(int64)&#39;</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">nogil</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">wait_loop_withgil</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function under test.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+                    <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span>
+                    <span class="n">out</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">**</span><span class="mf">2.</span>
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">contexttimer</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">)</span> <span class="k">as</span> <span class="n">numba_wall</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">contexttimer</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">)</span> <span class="k">as</span> <span class="n">numba_cpu</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">=</span><span class="n">wait_loop_withgil</span><span class="p">(</span><span class="n">nloops</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;numba wall time {numba_wall.elapsed} and cpu time {numba_cpu.elapsed}&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;numba speed-up factor {(pure_wall.elapsed - numba_wall.elapsed)/numba_wall.elapsed}&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+numba wall time 0.004756920970976353 and cpu time 0.003953999999996682
+numba speed-up factor 3114.617763751039
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+                    <span class="n">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(message)s</span><span class="s1"> </span><span class="si">%(threadName)s</span><span class="s1"> </span><span class="si">%(processName)s</span><span class="s1">&#39;</span><span class="p">,</span>
+                    <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">find_ids</span><span class="p">():</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;debug logging: &#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">copy</span>
+<span class="n">nprocs</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">nloops</span><span class="o">=</span><span class="mi">1250</span>
+<span class="n">thread_ids</span><span class="o">=</span><span class="p">[(</span><span class="n">find_ids</span><span class="p">,[],{})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nprocs</span><span class="p">)]</span>
+<span class="n">thread2</span><span class="o">=</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">thread_ids</span><span class="p">)</span>
+<span class="n">jobs</span><span class="o">=</span><span class="p">[(</span><span class="n">wait_loop_nogil</span><span class="p">,[</span><span class="n">nloops</span><span class="p">],{})</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nprocs</span><span class="p">)]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[(CPUDispatcher(&lt;function wait_loop_nogil at 0x11b77d1e0&gt;), [1250], {}), (CPUDispatcher(&lt;function wait_loop_nogil at 0x11b77d1e0&gt;), [1250], {}), (CPUDispatcher(&lt;function wait_loop_nogil at 0x11b77d1e0&gt;), [1250], {})]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">with</span> <span class="n">contexttimer</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">)</span> <span class="k">as</span> <span class="n">wall</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">contexttimer</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">process_time</span><span class="p">)</span> <span class="k">as</span> <span class="n">cpu</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">nprocs</span><span class="p">,</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;threading&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">parallel</span><span class="p">:</span>
+            <span class="n">parallel</span><span class="p">(</span><span class="n">thread_ids</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">=</span><span class="n">parallel</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+            <span class="n">parallel</span><span class="p">(</span><span class="n">thread_ids</span><span class="p">)</span>
+            <span class="n">results</span><span class="o">=</span><span class="n">parallel</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+            <span class="n">parallel</span><span class="p">(</span><span class="n">thread_ids</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s1">&#39;wall time {wall.elapsed} and cpu time {cpu.elapsed}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+debug logging:  Thread-5 MainProcess
+debug logging:  Thread-7 MainProcess
+debug logging:  Thread-6 MainProcess
+debug logging:  Thread-5 MainProcess
+debug logging:  Thread-6 MainProcess
+debug logging:  Thread-7 MainProcess
+debug logging:  Thread-5 MainProcess
+debug logging:  Thread-6 MainProcess
+debug logging:  Thread-7 MainProcess
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[1250.0, 1250.0, 1250.0]
+wall time 2.484209575224668 and cpu time 6.799613999999998
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">cffi</span> <span class="kn">import</span> <span class="n">FFI</span>
+<span class="n">ffi</span><span class="o">=</span><span class="n">FFI</span><span class="p">()</span>
+<span class="n">ffi</span><span class="o">.</span><span class="n">cdef</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    void get_thread_id(char *thread_id);</span>
+<span class="s2">    void get_process_id(char *process_id);</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+<span class="n">lib</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">dlopen</span><span class="p">(</span><span class="s1">&#39;/usr/local/lib/libthread_tools.so&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">lib</span><span class="p">))</span>
+<span class="n">arg_thread</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">get_thread_id</span><span class="p">(</span><span class="n">arg_thread</span><span class="p">)</span>
+<span class="n">out_thread</span><span class="o">=</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">arg_thread</span><span class="p">)</span>
+<span class="n">str_out</span><span class="o">=</span><span class="n">out_thread</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;-{str_out}-&quot;</span><span class="p">)</span>
+<span class="n">arg_process</span> <span class="o">=</span> <span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">lib</span><span class="o">.</span><span class="n">get_process_id</span><span class="p">(</span><span class="n">arg_process</span><span class="p">)</span>
+<span class="n">out_process</span><span class="o">=</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">arg_process</span><span class="p">)</span>
+<span class="n">str_out</span><span class="o">=</span><span class="n">out_process</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s2">&quot;-{str_out}-&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;get_process_id&#39;, &#39;get_thread_id&#39;]
+-4fdf76a5-
+-66759-
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">nprocs</span><span class="o">=</span><span class="mi">10</span>
+<span class="n">arg_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">fun_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="n">dict_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nprocs</span><span class="p">):</span>
+    <span class="n">fun_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">get_thread_id</span><span class="p">)</span>
+    <span class="n">arg_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ffi</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;char[]&quot;</span><span class="p">,</span><span class="mi">25</span><span class="p">))</span>
+    <span class="n">dict_list</span><span class="o">.</span><span class="n">append</span><span class="p">({})</span>
+<span class="n">ptr_list</span><span class="o">=</span><span class="p">[[</span><span class="n">ffi</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="s2">&quot;char*&quot;</span><span class="p">,</span><span class="n">item</span><span class="p">)]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">arg_list</span><span class="p">]</span>
+<span class="n">jobs</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">fun_list</span><span class="p">,</span><span class="n">ptr_list</span><span class="p">,</span><span class="n">dict_list</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">nprocs</span><span class="p">,</span><span class="n">backend</span><span class="o">=</span><span class="s1">&#39;threading&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">parallel</span><span class="p">:</span>
+    <span class="n">parallel</span><span class="p">(</span><span class="n">jobs</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ptr_list</span><span class="p">:</span>
+    <span class="n">out_thread</span><span class="o">=</span><span class="n">ffi</span><span class="o">.</span><span class="n">string</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">out_thread</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[(&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041ba6c0&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041be530&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041c0890&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041b6db0&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041b5390&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041c0900&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041b6fb0&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041ac5e0&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041b28c0&gt;], {}), (&lt;cdata &#39;void(*)(char *)&#39; 0x11bd6dd20&gt;, [&lt;cdata &#39;char *&#39; 0x7fce041b3440&gt;], {})]
+8be8ad52
+8be8ad52
+8be8ad52
+8be8ad52
+8be8ad52
+8be8ad52
+8be8ad52
+8be8ad52
+8be8ad52
+8be8ad52
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">dask.distributed</span> <span class="kn">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">multiprocessing.pool</span> <span class="kn">import</span> <span class="n">ThreadPool</span>
+<span class="kn">import</span> <span class="nn">dask</span>
+<span class="kn">import</span> <span class="nn">dask.array</span> <span class="kn">as</span> <span class="nn">da</span>
+<span class="n">pool</span> <span class="o">=</span> <span class="n">ThreadPool</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">dask</span><span class="o">.</span><span class="n">set_options</span><span class="p">(</span><span class="n">pool</span><span class="o">=</span><span class="n">pool</span><span class="p">)</span>
+<span class="n">client</span><span class="o">=</span><span class="n">Client</span><span class="p">()</span>
+<span class="kn">import</span> <span class="nn">zarr</span><span class="o">,</span> <span class="nn">glob</span>
+<span class="n">zarr_files</span><span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;*zarr&quot;</span><span class="p">))</span>
+<span class="c1">#pq_files=sorted(glob.glob(&quot;*.pq&quot;))</span>
+
+<span class="n">qn_list</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">zfile</span> <span class="ow">in</span> <span class="n">zarr_files</span><span class="p">:</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">zarr</span><span class="o">.</span><span class="n">open_group</span><span class="p">(</span><span class="n">zfile</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+    <span class="n">qn_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">root</span><span class="p">[</span><span class="s1">&#39;QN&#39;</span><span class="p">])</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">da</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">the_qn</span><span class="p">,</span><span class="n">chunks</span><span class="o">=</span><span class="n">the_qn</span><span class="o">.</span><span class="n">chunks</span><span class="p">)</span> <span class="k">for</span> <span class="n">the_qn</span> <span class="ow">in</span> <span class="n">qn_list</span><span class="p">]</span>
+
+<span class="c1"># y=x**2.</span>
+
+
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="o">**</span><span class="mf">2.</span>
+<span class="n">out</span><span class="o">=</span><span class="n">y</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(5, 128, 256, 256)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="nd">@jit</span><span class="p">(</span><span class="s1">&#39;float64(int64)&#39;</span><span class="p">,</span> <span class="n">nopython</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">nogil</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">wait_loop_nogil</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function under test.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">j</span><span class="p">):</span>
+                    <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">4</span>
+                    <span class="n">out</span><span class="o">=</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">out</span><span class="o">=</span><span class="n">out</span><span class="o">**</span><span class="mf">2.</span>
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+    </div>
+      
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+        &copy; Copyright 2019, Philip Austin.<br/>
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
