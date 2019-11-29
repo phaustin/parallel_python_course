@@ -1,0 +1,1 @@
+mpirun  -np 8  --hostfile hostfile.txt python mpi_helloworld.py
